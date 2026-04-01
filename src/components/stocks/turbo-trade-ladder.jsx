@@ -1,233 +1,290 @@
-import { ChevronDown, Menu } from 'lucide-react';
+import { ChevronDown, Menu, Info, Layers, Pencil } from 'lucide-react';
 import { useState } from 'react';
 
 const TurboTradeLadder = () => {
-    const [activeTradeTab, setActiveTradeTab] = useState('trade'); 
-    const [buySellMode, setBuySellMode] = useState('buy');  
-    const [orderType, setOrderType] = useState('limit'); // 'limit', 'market', 'stop'
-    const [limitPrice, setLimitPrice] = useState('4565.66');
-    const [stopPrice, setStopPrice] = useState('');
-    const [takeProfitPrice, setTakeProfitPrice] = useState('');
-    const [showStopLoss, setShowStopLoss] = useState(false);
-    const [showTakeProfit, setShowTakeProfit] = useState(false);
+    const [activeTradeTab, setActiveTradeTab] = useState('trade');
+    const [buySellMode, setBuySellMode] = useState('buy');
+    const [orderType, setOrderType] = useState('limit');
+    const [limitPrice, setLimitPrice] = useState('4565.56');
+    const [stopLossChecked, setStopLossChecked] = useState(false);
+    const [takeProfitChecked, setTakeProfitChecked] = useState(false);
+    const [stopLossVal, setStopLossVal] = useState('-10%');
+    const [takeProfitVal, setTakeProfitVal] = useState('40%');
+
     return (
         <>
             {/* Tab Navigation */}
-            <div className="flex justify-between items-center border-b border-gray-200 sticky top-0 bg-white">
-                <div className="flex gap-1 items-center justify-start"> 
-                    <button
-                        onClick={() => setActiveTradeTab('trade')}
-                        className={`flex-1 py-3 px-2 text-sm font-medium transition-colors ${activeTradeTab === 'trade'
-                            ? 'text-black border-b-2 border-black'
-                            : 'text-[#616161] border-b-2 border-transparent'
+            <div className="flex justify-between items-center border-b border-gray-200 sticky top-0 bg-white px-3">
+                <div className="flex items-center">
+                    {[
+                        { key: 'trade', label: 'Trade' },
+                        { key: 'turbo', label: 'TurboTrader' },
+                        { key: 'ladder', label: 'Ladder' },
+                    ].map(({ key, label }) => (
+                        <button
+                            key={key}
+                            onClick={() => setActiveTradeTab(key)}
+                            className={`py-3 px-3 text-sm font-medium transition-colors whitespace-nowrap ${
+                                activeTradeTab === key
+                                    ? 'text-gray-900 border-b-2 border-gray-900'
+                                    : 'text-gray-500 border-b-2 border-transparent hover:text-gray-700'
                             }`}
-                    >
-                        Trade
-                    </button>
-                    <button
-                        onClick={() => setActiveTradeTab('turbo')}
-                        className={`flex-1 py-3 px-2 text-sm font-medium transition-colors ${activeTradeTab === 'turbo'
-                            ? 'text-black border-b-2 border-black'
-                            : 'text-[#616161] border-b-2 border-transparent'
-                            }`}
-                    >
-                        TurboTrader
-                    </button>
-                    <button 
-                        onClick={() => setActiveTradeTab('ladder')}
-                        className={`flex-1 py-3 px-2 text-sm font-medium transition-colors ${activeTradeTab === 'ladder'
-                            ? 'text-black border-b-2 border-black'
-                            : 'text-[#616161] border-b-2 border-transparent'
-                            }`}
-                    >
-                        Ladder
-                    </button>
+                        >
+                            {label}
+                        </button>
+                    ))}
                 </div>
-                <div className='ml-auto'>  
-                    <Menu size={18} /> 
-                </div>
+                <Menu size={16} className="text-gray-500 flex-none" />
             </div>
 
             {/* Tab Content */}
-            <div className="flex-1 overflow-auto p-4">
+            <div className="overflow-auto">
                 {activeTradeTab === 'trade' && (
-                    <div className="space-y-4">
-                        {/* Buy/Sell Selector */}
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => setBuySellMode('buy')}
-                                className={`flex-1 py-3 px-4 rounded font-semibold text-white transition-colors ${buySellMode === 'buy'
-                                    ? 'bg-green-500 hover:bg-green-600'
-                                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
-                                    }`}
-                            >
-                                BUY
-                            </button>
-                            <button
-                                onClick={() => setBuySellMode('sell')}
-                                className={`flex-1 py-3 px-4 rounded font-semibold text-white transition-colors ${buySellMode === 'sell'
-                                    ? 'bg-red-500 hover:bg-red-600'
-                                    : 'bg-gray-300 text-gray-700 hover:bg-gray-400'
-                                    }`}
-                            >
-                                SELL
-                            </button>
-                        </div>
+                    <div className="p-3 space-y-3">
 
-                        {/* Order Type Selection */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-semibold text-gray-700 uppercase">Order Type</label>
+                        {/* Side – Buy / Sell */}
+                        <div>
+                            <p className="text-xs text-gray-500 mb-1.5">Side</p>
                             <div className="flex gap-2">
-                                {['limit', 'market', 'stop'].map((type) => (  
+                                <button
+                                    onClick={() => setBuySellMode('buy')}
+                                    className={`flex-1 py-2.5 rounded-md text-sm font-semibold transition-colors ${
+                                        buySellMode === 'buy'
+                                            ? 'bg-[#4CAF50] text-white'
+                                            : 'bg-[#F0FFF0] text-[#4CAF50]'
+                                    }`}
+                                >
+                                    Buy
+                                </button>
+                                <button
+                                    onClick={() => setBuySellMode('sell')}
+                                    className={`flex-1 py-2.5 rounded-md text-sm font-semibold transition-colors ${
+                                        buySellMode === 'sell'
+                                            ? 'bg-[#F44336] text-white'
+                                            : 'bg-[#FFF0F0] text-[#F44336]'
+                                    }`}
+                                >
+                                    Sell
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Order Type – pill selector */}
+                        <div>
+                            <div className="flex items-center gap-1 mb-1.5">
+                                <p className="text-xs text-gray-500">Order Type</p>
+                                <Info size={12} className="text-gray-400" />
+                            </div>
+                            <div className="flex gap-2">
+                                {[
+                                    { key: 'limit', label: 'Limit' },
+                                    { key: 'market', label: 'Market' },
+                                    { key: 'stop', label: 'Stop' },
+                                ].map(({ key, label }) => (
                                     <button
-                                        key={type}
-                                        onClick={() => setOrderType(type)}
-                                        className={`flex-1 py-2 px-3 text-xs font-medium rounded transition-colors ${orderType === type
-                                            ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                                            : 'bg-gray-100 text-gray-700 border border-gray-200'
-                                            }`}
+                                        key={key}
+                                        onClick={() => setOrderType(key)}
+                                        className={`flex-1 py-2 text-xs font-medium rounded-md border transition-colors ${
+                                            orderType === key
+                                                ? 'bg-[#EDE7F6] text-[#7B1FA2] border-[#CE93D8]'
+                                                : 'bg-white text-gray-600 border-gray-300'
+                                        }`}
                                     >
-                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                        {label}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Quick Amount Buttons */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-semibold text-gray-700 uppercase">Quick Amount</label>
-                            <div className="grid grid-cols-3 gap-2">
-                                {['10', '50', '100', '500', '+1', '-1'].map((amount) => (
+                        {/* Order Type – quantity input row */}
+                        <div>
+                            <p className="text-xs text-gray-500 mb-1.5">Order Type</p>
+                            {/* Input with icons */}
+                            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden mb-2">
+                                <input
+                                    type="text"
+                                    placeholder="First name"
+                                    className="flex-1 px-3 py-2 text-sm outline-none text-gray-400"
+                                />
+                                <button className="w-8 h-9 flex items-center justify-center bg-[#EDE7F6] border-l border-gray-300">
+                                    <Layers size={14} className="text-[#7B1FA2]" />
+                                </button>
+                                <button className="w-8 h-9 flex items-center justify-center border-l border-gray-300 text-gray-500 text-xs font-bold">
+                                    %
+                                </button>
+                                <button className="w-8 h-9 flex items-center justify-center border-l border-gray-300 text-gray-500 text-xs font-bold">
+                                    $
+                                </button>
+                            </div>
+                            {/* Quick Qty Buttons */}
+                            <div className="grid grid-cols-6 gap-1">
+                                {['10', '50', '100', '500', '+1', '-1'].map((v) => (
                                     <button
-                                        key={amount}
-                                        className="py-2 px-2 bg-gray-100 border border-gray-300 rounded text-xs font-medium text-gray-700 hover:bg-gray-200 transition-colors"
+                                        key={v}
+                                        className="py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
                                     >
-                                        {amount}
+                                        {v}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Price Input */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-semibold text-gray-700 uppercase">
-                                {orderType === 'limit' ? 'Limit Price' : orderType === 'stop' ? 'Stop Price' : 'Market Price'}
-                            </label>
-                            <div className="flex items-center gap-2 border border-gray-300 rounded px-3 py-2">
+                        {/* Limit Price */}
+                        <div>
+                            <p className="text-xs text-gray-500 mb-1.5">Limit Price</p>
+                            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
                                 <input
                                     type="text"
                                     value={limitPrice}
                                     onChange={(e) => setLimitPrice(e.target.value)}
-                                    className="flex-1 outline-none text-sm font-medium"
-                                    placeholder="0.00"
+                                    className="flex-1 px-3 py-2 text-sm outline-none text-gray-900"
                                 />
-                                <ChevronDown size={16} className="text-gray-400" />
+                                {/* Spinner arrows */}
+                                <div className="flex flex-col border-l border-gray-300">
+                                    <button className="px-2 py-0.5 text-gray-500 hover:bg-gray-100 text-xs leading-none">▲</button>
+                                    <button className="px-2 py-0.5 text-gray-500 hover:bg-gray-100 text-xs leading-none border-t border-gray-200">▼</button>
+                                </div>
+                                <button className="w-9 h-full flex items-center justify-center border-l border-gray-300 text-gray-400 hover:bg-gray-50">
+                                    <Pencil size={13} />
+                                </button>
                             </div>
                         </div>
 
-                        {/* Time-in-Force Selection */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-semibold text-gray-700 uppercase">Time-in-Force</label>
-                            <div className="flex gap-2">
-                                <select className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm bg-white outline-none hover:border-gray-400">
+                        {/* Time-in-Force + Trading Hours */}
+                        <div className="grid grid-cols-2 gap-2">
+                            <div>
+                                <p className="text-xs text-gray-500 mb-1.5">Time-in-Force</p>
+                                <div className="relative">
+                                    <select className="w-full appearance-none border border-gray-300 rounded-md px-3 py-2 text-sm bg-white text-gray-700 outline-none pr-7">
+                                        <option>Day</option>
+                                        <option>GTC</option>
+                                        <option>OPG</option>
+                                    </select>
+                                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                                </div>
+                            </div>
+                            <div>
+                                <p className="text-xs text-gray-500 mb-1.5">Trading Hours</p>
+                                <div className="relative">
+                                    <select className="w-full appearance-none border border-gray-300 rounded-md px-3 py-2 text-sm bg-white text-gray-700 outline-none pr-7">
+                                        <option>Only Regular Hours</option>
+                                        <option>Extended</option>
+                                    </select>
+                                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Stop Loss + Take-Profit */}
+                        <div className="grid grid-cols-2 gap-2">
+                            {/* Stop Loss */}
+                            <div>
+                                <label className="flex items-center gap-1.5 mb-1 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={stopLossChecked}
+                                        onChange={(e) => setStopLossChecked(e.target.checked)}
+                                        className="w-3.5 h-3.5 accent-gray-600"
+                                    />
+                                    <span className="text-xs font-medium text-gray-700">Stop Loss</span>
+                                </label>
+                                <p className="text-[10px] text-gray-400 mb-1">Stop Price ($247.42-$244.8)</p>
+                                <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                                    <input
+                                        type="text"
+                                        value={stopLossVal}
+                                        onChange={(e) => setStopLossVal(e.target.value)}
+                                        className="flex-1 px-2 py-1.5 text-xs outline-none text-gray-700 min-w-0"
+                                    />
+                                    <span className="px-2 text-xs text-gray-500 border-l border-gray-300 py-1.5">%</span>
+                                </div>
+                                <p className="text-[10px] text-gray-400 mt-1">Est.P&L:---</p>
+                            </div>
+                            {/* Take-Profit */}
+                            <div>
+                                <label className="flex items-center gap-1.5 mb-1 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={takeProfitChecked}
+                                        onChange={(e) => setTakeProfitChecked(e.target.checked)}
+                                        className="w-3.5 h-3.5 accent-gray-600"
+                                    />
+                                    <span className="text-xs font-medium text-gray-700">Take-Profit</span>
+                                </label>
+                                <p className="text-[10px] text-gray-400 mb-1">Stop Price ($247.42-$244.8)</p>
+                                <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                                    <input
+                                        type="text"
+                                        value={takeProfitVal}
+                                        onChange={(e) => setTakeProfitVal(e.target.value)}
+                                        className="flex-1 px-2 py-1.5 text-xs outline-none text-gray-700 min-w-0"
+                                    />
+                                    <span className="px-2 text-xs text-gray-500 border-l border-gray-300 py-1.5">%</span>
+                                </div>
+                                <p className="text-[10px] text-gray-400 mt-1">Est.P&L:---</p>
+                            </div>
+                        </div>
+
+                        {/* Time in Force (Sub-orders) */}
+                        <div>
+                            <p className="text-xs text-gray-500 mb-1.5">Time in Force (Sub-orders)</p>
+                            <div className="relative">
+                                <select className="w-full appearance-none border border-gray-300 rounded-md px-3 py-2 text-sm bg-white text-gray-700 outline-none pr-7">
                                     <option>Day</option>
                                     <option>GTC</option>
-                                    <option>OPG</option>
                                 </select>
-                                <select className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm bg-white outline-none hover:border-gray-400">
-                                    <option>Trading Hours</option>
-                                    <option>Extended</option>
-                                </select>
+                                <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                             </div>
                         </div>
 
-                        {/* Stop Loss and Take Profit */}
-                        <div className="space-y-2">
-                            <label className="flex items-center gap-2 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    checked={showStopLoss}
-                                    onChange={(e) => setShowStopLoss(e.target.checked)}
-                                    className="w-4 h-4"
-                                />
-                                <span className="text-xs font-semibold text-gray-700">Stop Loss</span>
-                            </label>
-                            {showStopLoss && (
-                                <input
-                                    type="text"
-                                    value={stopPrice}
-                                    onChange={(e) => setStopPrice(e.target.value)}
-                                    placeholder="Enter stop price"
-                                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none"
-                                />
-                            )}
-
-                            <label className="flex items-center gap-2 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    checked={showTakeProfit}
-                                    onChange={(e) => setShowTakeProfit(e.target.checked)}
-                                    className="w-4 h-4"
-                                />
-                                <span className="text-xs font-semibold text-gray-700">Take Profit</span>
-                            </label>
-                            {showTakeProfit && (
-                                <input
-                                    type="text"
-                                    value={takeProfitPrice}
-                                    onChange={(e) => setTakeProfitPrice(e.target.value)}
-                                    placeholder="Enter take profit price"
-                                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none"
-                                />
-                            )}
-                        </div>
+                        {/* Buy / Sell Button */}
+                        <button
+                            className={`w-full py-3 rounded-full text-sm font-semibold text-white transition-colors ${
+                                buySellMode === 'buy'
+                                    ? 'bg-[#4CAF50] hover:bg-[#43A047]'
+                                    : 'bg-[#F44336] hover:bg-[#E53935]'
+                            }`} 
+                        >
+                            {buySellMode === 'buy' ? 'Buy' : 'Sell'}
+                        </button>
 
                         {/* Order Summary */}
-                        <div className="space-y-2 border-t border-gray-200 pt-4">
+                        <div className="border-t border-gray-200 pt-3 space-y-2">
                             <div className="flex justify-between text-xs">
-                                <span className="text-gray-600">Estimated Amount:</span>
-                                <span className="font-medium text-gray-900">456,566.00</span>
+                                <span className="text-gray-600">Estimated Amount</span>
+                                <span className="text-gray-900 font-medium">$47,192.00</span>
                             </div>
                             <div className="flex justify-between text-xs">
-                                <span className="text-gray-600">Estimated Fee:</span>
-                                <span className="font-medium text-gray-900">22.83</span>
-                            </div>
-                            <div className="flex justify-between text-xs border-t border-gray-200 pt-2">
-                                <span className="text-gray-600">Buying Power:</span>
-                                <span className="font-medium text-green-600">$123,456.50</span>
+                                <span className="text-gray-600">Estimated Fee</span>
+                                <span className="text-gray-500">--</span>
                             </div>
                             <div className="flex justify-between text-xs">
-                                <span className="text-gray-600">Max Shares:</span>
-                                <span className="font-medium text-gray-900">100</span>
+                                <span className="text-gray-600">Buying Power</span>
+                                <span className="text-gray-900 font-medium">$</span>
+                            </div>
+                            <div className="flex justify-between text-xs">
+                                <span className="text-gray-600">Max Shares to Buy</span>
+                                <span className="text-gray-500"></span>
                             </div>
                         </div>
 
-                        {/* Buy/Sell Button */}
-                        <button
-                            className={`w-full py-3 rounded font-semibold text-white text-sm transition-colors ${buySellMode === 'buy'
-                                ? 'bg-green-500 hover:bg-green-600'
-                                : 'bg-red-500 hover:bg-red-600'
-                                }`}
-                        >
-                            {buySellMode === 'buy' ? 'BUY' : 'SELL'}
-                        </button>
                     </div>
                 )}
 
                 {activeTradeTab === 'turbo' && (
-                    <div className="flex items-center justify-center h-40 text-gray-500 text-sm">
+                    <div className="flex items-center justify-center h-40 text-gray-500 text-sm p-4">
                         <p>TurboTrader interface coming soon</p>
                     </div>
                 )}
 
                 {activeTradeTab === 'ladder' && (
-                    <div className="flex items-center justify-center h-40 text-gray-500 text-sm">
+                    <div className="flex items-center justify-center h-40 text-gray-500 text-sm p-4">
                         <p>Ladder interface coming soon</p>
                     </div>
                 )}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default TurboTradeLadder;
