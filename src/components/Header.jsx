@@ -21,12 +21,12 @@ export default function Header() {
           >
             {/* Profile Avatar */}
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">AK</span>
+              <span className="text-white font-semibold text-xs">AK</span>
             </div>
 
             {/* User Info */}
             <div className="flex flex-col items-start">
-              <span className="text-white font-semibold text-sm">Ahmed K.</span>
+              <span className="text-white font-semibold text-xs">Ahmed K.</span>
               <span className="text-white text-xs opacity-90">Premium - AED</span>
             </div>
 
