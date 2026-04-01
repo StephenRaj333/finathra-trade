@@ -5,6 +5,7 @@ import ChartContainer from '../../components/stocks/chart-container';
 import OpenAccount from '../../components/stocks/open-account';
 import QuotesWatchlist from '../../components/stocks/quotes-watchlist';
 import OrdersNOI from '../../components/stocks/orders-noi';
+import TimeAnalysis from '../../components/stocks/time-analysis';
 
 const StocksPage = () => {
   const [leftWidth, setLeftWidth] = useState(50); // percentage 
@@ -45,7 +46,7 @@ const StocksPage = () => {
             <Resizable
                 defaultSize={{
                     width: '100%',
-                    height: '75%',
+                    height: '60%',
                 }}
                 minHeight="15%"
                 maxHeight="85%"
@@ -66,7 +67,7 @@ const StocksPage = () => {
             <Resizable
                 defaultSize={{
                     width: '100%',
-                    height: '25%',
+                    height: '40%',
                 }}
                 minHeight="15%"
                 maxHeight="85%"
@@ -156,7 +157,6 @@ const StocksPage = () => {
                   bottomLeft: false,
                   topLeft: false,
                 }}
-                className="bg-gray-50 rounded-lg p-4 overflow-hidden border-2 border-gray-200"
               >
                 <div className="flex flex-col h-full gap-4">
                   {/* Right Bottom Left Top */}
@@ -200,12 +200,9 @@ const StocksPage = () => {
                       bottomLeft: false,
                       topLeft: false,
                     }}
-                    className="bg-white border-2 border-gray-200 rounded-lg overflow-auto"
+                    className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden flex flex-col"
                   >
-                    <div className="p-4">
-                      <h3 className="font-bold text-gray-700 mb-2">Right Bottom - Left Bottom</h3>
-                      <p className="text-gray-600 text-sm">Resizable content area</p>
-                    </div>
+                    <TimeAnalysis />
                   </Resizable>
                 </div>
               </Resizable>
