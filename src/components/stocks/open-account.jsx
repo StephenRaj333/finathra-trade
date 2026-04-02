@@ -44,7 +44,7 @@ const OpenAccount = () => {
                 {activeBottomTab === 'order' && (
                     <div className="flex flex-col items-center justify-center px-4">
                         <div className="mb-4">
-                            <img className='w-full h-full min-w-30 max-w-40' src="/account-opening.png" alt="Open Account" />
+                            <img className='w-full h-full min-w-30 max-w-60' src="/account-opening.png" alt="Open Account" />
                         </div>
                         <h3 className="text-lg font-semibold text-[#4F1D81] mb-1">Open Account</h3>
                         <p className="text-sm text-[#7F7F7F]">to view orders</p>

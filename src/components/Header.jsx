@@ -69,14 +69,19 @@ export default function Header() {
             >
               {/* Avatar */}
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-none">
-                <span className="text-white font-bold text-xs">AK</span>
+                <img src="/user.png" alt="user info" /> 
               </div>
 
               {/* Name + Badge */}
               <div className="flex flex-col items-start leading-tight">
-                <span className="text-white font-semibold text-xs">Ahmed K.</span>
-                <span className="text-purple-300 text-[10px] font-medium">Premium • AEB</span>
+                <div className='flex flex-col items-start leading-tight'>
+                  <span className="text-white font-semibold text-xs">Ahmed K.</span>
+                  <span className="text-purple-300 text-[10px] font-medium">Premium • AEB</span>
+                </div>
               </div>
+              <div className="img-wrapper"> 
+                  <ChevronDown size={16} />
+                </div>
             </button>
 
             {/* Dropdown Menu */}

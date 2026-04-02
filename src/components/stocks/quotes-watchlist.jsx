@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Star, Bell, ChevronDown, AlignJustify, ArrowUpDown } from 'lucide-react';
+import { Star, Bell, ChevronDown, AlignJustify, ArrowUpDown,Menu } from 'lucide-react';
 
 const QuotesWatchlist = () => {
   const [activeRightTopTab, setActiveRightTopTab] = useState('quotes');
     return (
         <>
             {/* Tabs */}
-            <div className="flex items-center gap-0 border-b border-gray-200 bg-[#f7f7f7]">
+            <div className="flex items-center gap-0 border-b border-gray-200 bg-[#f7f7f7] pr-4">
+                <div className="flex items-center justify-start">
                 <button
                     onClick={() => setActiveRightTopTab('quotes')}
                     className={`px-4 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${activeRightTopTab === 'quotes'
@@ -25,6 +26,10 @@ const QuotesWatchlist = () => {
                 >
                     Watchlist
                 </button>
+                </div>
+                <div className="ml-auto">
+                    <Menu size={16} />
+                </div>
             </div>
 
             {/* Tab Content */}
@@ -32,12 +37,13 @@ const QuotesWatchlist = () => {
                 {activeRightTopTab === 'quotes' && (
                     <div className="p-6">
                         {/* Top Icons */}
-                        <div className="flex justify-end gap-2">
+                        <div className="flex gap-4 justify-between items-center ml-auto gap-2 border border-[#EDE8F2] w-fit p-1 rounded">
                             <button className="text-gray-400 hover:text-gray-600">
-                                <Star size={20} className="fill-gray-300" strokeWidth={1.5} />
+                                <Star size={20} color="#616161" strokeWidth={1.5} />
                             </button>
+                            <div className="w-px h-5 bg-[#EDE8F2]" /> 
                             <button className="text-gray-400 hover:text-gray-600">
-                                <Bell size={20} strokeWidth={1.5} />
+                                <Bell size={20} color="#616161" strokeWidth={1.5} />
                             </button>
                         </div>
 

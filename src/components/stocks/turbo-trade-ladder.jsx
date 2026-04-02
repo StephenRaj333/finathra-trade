@@ -14,7 +14,7 @@ const TurboTradeLadder = () => {
     return (
         <>
             {/* Tab Navigation */}
-            <div className="flex justify-between items-center bg-[#f7f7f7] border-b border-gray-200 sticky top-0">
+            <div className="flex justify-between items-center bg-[#f7f7f7] border-b border-gray-200 sticky top-0 pr-4"> 
                 <div className="flex items-center">
                     {[
                         { key: 'trade', label: 'Trade' },
@@ -34,11 +34,13 @@ const TurboTradeLadder = () => {
                         </button>
                     ))}
                 </div>
-                <Menu size={16} className="text-gray-500 flex-none" />
+                <div className='ml-auto'> 
+                    <Menu size={16}  />
+                </div>
             </div>
 
             {/* Tab Content */}
-            <div className="overflow-auto">
+            <div className="overflow-auto hide-scrollbar"> 
                 {activeTradeTab === 'trade' && (
                     <div className="p-3 space-y-3">
 
