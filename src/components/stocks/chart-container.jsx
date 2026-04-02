@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CandlestickChart from './CandleChart';
-import { Menu, Star, MoreVertical, RotateCcw } from 'lucide-react';
+import { Star, MoreVertical, RotateCcw } from 'lucide-react';
 import ChartControls from './chart-controls';
 
 
@@ -11,25 +11,6 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
 
     return (
         <>
-
-            {/* Header Tabs */}
-            <div className="flex items-center flex-wrap gap-4 px-2 lg:px-4 py-2 lg:py-3 border-b border-gray-200 bg-gray-50 overflow-x-auto">
-                <button className="text-xs lg:text-xs font-medium text-gray-700 hover:text-gray-900 whitespace-nowrap pb-2 border-b-2 border-purple-600">Chart</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden sm:inline">Option</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden sm:inline">Related</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden md:inline">Note</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden lg:inline">News</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden lg:inline">Comments</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden xl:inline">Financials</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden xl:inline">Analysis</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden 2xl:inline">Corp Actions</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden 2xl:inline">Releases</button>
-                <button className="text-xs lg:text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap pb-2 hidden 2xl:inline">Order Flow</button>
-                <button className="ml-auto flex-shrink-0">
-                    <Menu size={16} className="lg:size-5 text-gray-600 hover:text-gray-900" />
-                </button>
-            </div>
-
             <ChartControls chartType={chartType} onChartTypeChange={setChartType} gridLayout={gridLayout} onGridChange={onGridChange} />
 
             {/* Stock Info Header */}

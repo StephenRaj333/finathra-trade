@@ -14,7 +14,7 @@ const TurboTradeLadder = () => {
     return (
         <>
             {/* Tab Navigation */}
-            <div className="flex justify-between items-center border-b border-gray-200 sticky top-0 bg-white px-3">
+            <div className="flex justify-between items-center bg-[#f7f7f7] border-b border-gray-200 sticky top-0">
                 <div className="flex items-center">
                     {[
                         { key: 'trade', label: 'Trade' },
@@ -24,13 +24,13 @@ const TurboTradeLadder = () => {
                         <button
                             key={key}
                             onClick={() => setActiveTradeTab(key)}
-                            className={`py-3 px-3 text-sm font-medium transition-colors whitespace-nowrap ${
+                            className={`py-3 px-3 text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-colors whitespace-nowrap ${
                                 activeTradeTab === key
-                                    ? 'text-gray-900 border-b-2 border-gray-900'
-                                    : 'text-gray-500 border-b-2 border-transparent hover:text-gray-700'
+                                    ? 'bg-white text-black'
+                                    : 'text-gray-500 border-b-1 border-transparent hover:text-gray-700'
                             }`}
                         >
-                            {label}
+                            {label} 
                         </button>
                     ))}
                 </div>
@@ -91,9 +91,9 @@ const TurboTradeLadder = () => {
                                     <button
                                         key={key}
                                         onClick={() => setOrderType(key)}
-                                        className={`flex-1 py-2 text-xs font-medium border transition-colors ${
+                                        className={`flex-1 py-2 text-xs font-medium border first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br transition-colors ${
                                             orderType === key
-                                                ? 'bg-[#EDE7F6] text-[#7B1FA2] border-[#CE93D8]'
+                                                ? 'bg-[#EDE7F6] text-[#7B1FA2] border-gray-300'
                                                 : 'bg-white text-gray-600 border-gray-300'
                                         }`}
                                     >

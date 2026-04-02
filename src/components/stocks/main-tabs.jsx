@@ -1,0 +1,104 @@
+import { useState } from 'react';
+import { Menu } from 'lucide-react';
+import ChartContainer from './chart-container';
+
+const TABS = [
+    'Chart',
+    'Option',
+    'Related',
+    'Note',
+    'News',
+    'Comments',
+    'Financials',
+    'Analysis',
+    'Corp Actions',
+    'Releases',
+    'Order Flow',
+];
+
+const MainTabs = ({ gridLayout = 1, onGridChange }) => {
+    const [activeTab, setActiveTab] = useState('Chart');
+
+    return (
+        <div className="flex flex-col h-full"> 
+            {/* Tab Bar */}
+            <div className="flex items-center bg-[#f7f7f7] border-b border-gray-200 flex-shrink-0 overflow-x-auto hide-scrollbar">
+                {TABS.map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`px-2 py-2.5 border-r border-[#C8B9D8] rounded-tr-lg text-xs text-black font-medium whitespace-nowrap transition-colors ${
+                            activeTab === tab
+                                ? 'bg-white text-black'
+                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
+                <button className="ml-auto px-3 py-2.5 flex-shrink-0 text-gray-500 hover:text-gray-800">
+                    <Menu size={16} />
+                </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="flex-1 overflow-hidden">
+                {activeTab === 'Chart' && (
+                    <ChartContainer gridLayout={gridLayout} onGridChange={onGridChange} />
+                )}
+                {activeTab === 'Option' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Option — coming soon
+                    </div>
+                )}
+                {activeTab === 'Related' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Related — coming soon
+                    </div>
+                )}
+                {activeTab === 'Note' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Note — coming soon
+                    </div>
+                )}
+                {activeTab === 'News' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        News — coming soon
+                    </div>
+                )}
+                {activeTab === 'Comments' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Comments — coming soon
+                    </div>
+                )}
+                {activeTab === 'Financials' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Financials — coming soon
+                    </div>
+                )}
+                {activeTab === 'Analysis' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Analysis — coming soon
+                    </div>
+                )}
+                {activeTab === 'Corp Actions' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Corp Actions — coming soon
+                    </div>
+                )}
+                {activeTab === 'Releases' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Releases — coming soon
+                    </div>
+                )}
+                {activeTab === 'Order Flow' && (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                        Order Flow — coming soon
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default MainTabs;

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Resizable } from 're-resizable';
 
-import ChartContainer from '../../components/stocks/chart-container';
+import MainTabs from '../../components/stocks/main-tabs';
 import OpenAccount from '../../components/stocks/open-account';
 import QuotesWatchlist from '../../components/stocks/quotes-watchlist';
 import OrdersNOI from '../../components/stocks/orders-noi';
@@ -66,7 +66,7 @@ const StocksPage = () => {
                 }}
                 className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden flex flex-col"
             >
-              <ChartContainer gridLayout={gridLayout} onGridChange={setGridLayout} />
+              <MainTabs gridLayout={gridLayout} onGridChange={setGridLayout} />
             </Resizable>
             <Resizable
                 defaultSize={{

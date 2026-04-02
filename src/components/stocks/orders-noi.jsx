@@ -8,11 +8,11 @@ const OrdersNOI = () => {
     return (
         <>
             {/* Order Book / NOI Header Tabs */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
+            <div className="flex items-center justify-between pl-0 px-4 border-b border-gray-200 bg-[#f7f7f7]"> 
                 <div className="flex items-center gap-0 rounded-lg overflow-hidden">
                     <button
                         onClick={() => setActiveTab('orderBook')}
-                        className={`px-6 py-2 text-sm font-semibold transition-colors ${
+                        className={`px-4 py-2.5 text-sm font-semibold border-r border-[#C8B9D8] rounded-tr-lg transition-colors ${
                             activeTab === 'orderBook'
                                 ? 'bg-white text-gray-900'
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -23,7 +23,7 @@ const OrdersNOI = () => {
                     <div className="w-px bg-gray-300"></div>  
                     <button
                         onClick={() => setActiveTab('noi')}
-                        className={`px-6 py-2 text-sm font-semibold transition-colors ${
+                        className={`px-4 py-2.5 text-sm font-semibold border-r border-[#C8B9D8] rounded-tr-lg transition-colors ${
                             activeTab === 'noi'
                                 ? 'bg-white text-gray-900'
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

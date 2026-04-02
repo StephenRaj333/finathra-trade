@@ -9,11 +9,11 @@ const OpenAccount = () => {
         <>
 
             {/* Tabs */}
-            <div className="flex items-center gap-0 border-b border-gray-200 bg-gray-50">
+            <div className="flex items-center gap-0 border-b border-gray-200 bg-[#f7f7f7]">
                 <button
                     onClick={() => setActiveBottomTab('order')}
-                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-b-2 transition-all whitespace-nowrap ${activeBottomTab === 'order'
-                        ? 'text-gray-900 border-b-purple-600'
+                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${activeBottomTab === 'order'
+                        ? 'bg-white text-black'
                         : 'text-gray-600 border-b-transparent hover:text-gray-900'
                         }`}
                 >
@@ -21,8 +21,8 @@ const OpenAccount = () => {
                 </button>
                 <button
                     onClick={() => setActiveBottomTab('option')}
-                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-b-2 transition-all whitespace-nowrap ${activeBottomTab === 'option'
-                        ? 'text-gray-900 border-b-purple-600'
+                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${activeBottomTab === 'option'
+                        ? 'bg-white text-black'
                         : 'text-gray-600 border-b-transparent hover:text-gray-900'
                         }`}
                 >
@@ -30,8 +30,8 @@ const OpenAccount = () => {
                 </button>
                 <button
                     onClick={() => setActiveBottomTab('related')}
-                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-b-2 transition-all whitespace-nowrap ${activeBottomTab === 'related'
-                        ? 'text-gray-900 border-b-purple-600'
+                    className={`px-4 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${activeBottomTab === 'related'
+                        ? 'bg-white text-black'
                         : 'text-gray-600 border-b-transparent hover:text-gray-900'
                         }`}
                 >
