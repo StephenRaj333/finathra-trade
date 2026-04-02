@@ -1,41 +1,9 @@
 import { useState } from 'react';
 import CandlestickChart from './CandleChart';
 import { Menu, Star, MoreVertical, RotateCcw } from 'lucide-react';
+import ChartControls from './chart-controls';
 
-const icons = [
-    {
-        icons: "/icons/graph.png",
-        label: 'Chart',
-    },
-    {
-        icons: "/icons/candles.png",
-        label: 'Option',
-    },
-    {
-        icons: "/icons/coin.png",
-        label: 'Related',
-    },
-    {
-        icons: "/icons/edit.png",
-        label: 'Note',
-    },
-    {
-        icons: "/icons/grid.png",
-        label: 'News',
-    },
-    {
-        icons: "/icons/vs.png",
-        label: 'Comments',
-    },
-    {
-        icons: "/icons/youtube.png",
-        label: 'Financials',
-    },
-    {
-        icons: "/icons/cloud.png",
-        label: 'Analysis',
-    }
-];
+
 
 const ChartContainer = () => {
     const [chartType, setChartType] = useState('candles');
@@ -63,29 +31,7 @@ const ChartContainer = () => {
                 </button>
             </div>
 
-            {/* Toolbar with Icons */}
-            <div className="flex items-center flex-wrap gap-1 lg:gap-2 px-2 lg:px-4 py-2 border-b border-gray-200 bg-[#EDE8F2]">
-                <div className="flex gap-1 lg:gap-2 flex-wrap">
-                    {icons?.map((item, i) => (
-                        <button key={i} className="p-1 lg:p-2 hover:bg-gray-100 rounded text-gray-600 hover:text-gray-900 flex-shrink-0">
-                            <div className="w-3 h-3 lg:w-4 lg:h-4 rounded">
-                                <img src={item.icons} alt={item.label} className="w-full h-full object-contain" />
-                            </div>
-                        </button>
-                    ))}
-                </div>
-                <div className="mr-auto flex items-center flex-wrap gap-1 lg:gap-2 text-xs text-gray-600">
-                    <span className="hidden sm:inline">Volume</span>
-                    <span className="text-gray-400 hidden sm:inline">|</span>
-                    <span className="hidden md:inline">VWAP</span>
-                    <span className="text-gray-400 hidden md:inline">|</span>
-                    <span className="hidden lg:inline">MACD</span>
-                    <span className="text-gray-400 hidden lg:inline">|</span>
-                    <span className="hidden xl:inline">All indicators</span>
-                    <span className="text-gray-400 hidden xl:inline">|</span>
-                    <span className="hidden xl:inline">Script Editor</span>
-                </div>
-            </div>
+            <ChartControls /> 
 
             {/* Stock Info Header */}
             <div className="flex items-center justify-between flex-wrap gap-2 px-2 lg:px-4 py-2 lg:py-3 border-b border-gray-200 bg-white">
