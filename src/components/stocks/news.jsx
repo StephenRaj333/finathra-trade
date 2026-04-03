@@ -27,7 +27,7 @@ const News = () => {
                     />
                 </div>
                 <div className="right w-2/5 flex justify-end items-center gap-3">
-                    <div className='bg-[#EDE8F2] p-2 text-sm font-normal w-fit text-[#4F1D81] tracking-wide'>SLV</div>
+                    <div className='bg-[#EDE8F2] p-1.5 text-sm font-normal rounded w-fit text-[#4F1D81] tracking-wider'>SLV</div>
                     <div>
                         <div className="flex items-center gap-1.5 cursor-pointer" onClick={() => setIsModalOpen(true)}>
                             <SquarePlus size={24} strokeWidth={1.3} color="#724A9A" />

@@ -15,7 +15,7 @@ const OrdersNOI = () => {
                         className={`px-4 py-2.5 text-sm font-semibold border-r border-[#C8B9D8] rounded-tr-lg transition-colors ${
                             activeTab === 'orderBook'
                                 ? 'bg-white text-gray-900'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                : 'bg-gray-100 text-gray-600'
                         }`}
                     >
                         Order Book
@@ -26,7 +26,7 @@ const OrdersNOI = () => {
                         className={`px-4 py-2.5 text-sm font-semibold border-r border-[#C8B9D8] rounded-tr-lg transition-colors ${
                             activeTab === 'noi'
                                 ? 'bg-white text-gray-900'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                : 'bg-gray-100 text-gray-600'
                         }`}
                     >
                         NOII

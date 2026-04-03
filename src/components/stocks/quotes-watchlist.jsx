@@ -63,39 +63,38 @@ const QuotesWatchlist = () => {
                         <div className="flex items-center justify-between gap-40">
                             <div className="left-block flex flex-col gap-2.5 w-1/2">
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">Open</p>
+                                    <p className="text-xs text-[#616161] mb-1">Open</p>
                                     <p className="text-sm font-semibold text-green-600">4,510.95</p>
                                 </div>
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">High</p>
-                                    <p className="text-sm font-semibold text-green-600">4,510.95</p>
-                                </div>
-                                <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">Low</p>
+                                    <p className="text-xs text-[#616161] mb-1">Low</p>
                                     <p className="text-sm font-semibold text-red-600">4,510.95</p>
                                 </div>
-
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">Prev Close</p>
-                                    <p className="text-sm font-semibold text-red-600">4,510.95</p>
+                                    <p className="text-xs text-[#616161] mb-1">52 Wk High</p>
+                                    <p className="text-sm font-semibold text-[#616161]">4,510.95</p>
+                                </div>
+                                <div className='flex items-center justify-between'>
+                                    <p className="text-xs text-[#616161] mb-1">Volume</p>
+                                    <p className="text-sm font-semibold text-[#616161]">0.00</p>
                                 </div>
                             </div>
                             <div className="right-block flex flex-col gap-2.5 w-1/2">
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">52 Wk High</p>
-                                    <p className="text-sm font-semibold text-gray-900">4,510.95</p>
+                                    <p className="text-xs text-[#616161] mb-1">High</p>
+                                    <p className="text-sm font-semibold text-green-600">4,510.95</p>
                                 </div>
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">52 Wk Low</p>
-                                    <p className="text-sm font-semibold text-gray-900">4,510.95</p>
+                                    <p className="text-xs text-[#616161] mb-1">Prev Close</p>
+                                    <p className="text-sm font-semibold text-red-600">4,510.95</p>
                                 </div>
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">Volume</p>
-                                    <p className="text-sm font-semibold text-gray-900">0.00</p>
+                                    <p className="text-xs text-[#616161] mb-1">52 Wk Low</p>
+                                    <p className="text-sm font-semibold text-[#616161]">4,510.95</p>
                                 </div>
                                 <div className='flex items-center justify-between'>
-                                    <p className="text-xs text-gray-500 mb-1">Market Cap</p>
-                                    <p className="text-sm font-semibold text-gray-900">0.00</p>
+                                    <p className="text-xs text-[#616161] mb-1">Market Cap</p>
+                                    <p className="text-sm font-semibold text-[#616161]">0.00</p>
                                 </div>
                             </div>
                         </div>
