@@ -114,7 +114,7 @@ export default function CandlestickChart({
   useEffect(() => {
     if (!containerRef.current || data.length === 0) return;
 
-    // Create chart
+    // Create chart using container's actual dimensions
     const chartOptions = {
       layout: {
         textColor: '#1F2937',
@@ -132,7 +132,8 @@ export default function CandlestickChart({
         },
       },
       width: containerRef.current.clientWidth,
-      height: 360, 
+      height: containerRef.current.clientHeight || 360,
+      autoSize: true,
     };
 
     const chart = createChart(containerRef.current, chartOptions);
@@ -217,25 +218,25 @@ export default function CandlestickChart({
       });
     }
 
-    // Handle resize
-    const handleResize = () => {
-      if (containerRef.current) {
-        chart.applyOptions({
-          width: containerRef.current.clientWidth,
-        });
+    // Handle resize using ResizeObserver to track container size changes
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        if (width > 0 && height > 0) {
+          chart.applyOptions({ width, height });
+        }
       }
-    };
-
-    window.addEventListener('resize', handleResize);
+    });
+    resizeObserver.observe(containerRef.current);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       chart.remove();
     };
   }, [data, internalChartType]);
 
   return (
-    <div className="w-full bg-white rounded-lg p-4">   
+    <div className="w-full h-full bg-white rounded-lg p-4 flex flex-col">   
       {/* Header with Price Info */}
       {/* <div className="mb-6 flex justify-between items-start">
         <div className="flex-1">
@@ -288,8 +289,7 @@ export default function CandlestickChart({
       {/* Chart Container */}
       {loading ? (
         <div
-          className="w-full flex items-center justify-center bg-gray-50 rounded border-2 border-dashed border-gray-300"
-          style={{ height: '360px' }}
+          className="w-full flex-1 flex items-center justify-center bg-gray-50 rounded border-2 border-dashed border-gray-300"
         >
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-gray-300 border-t-gray-800 rounded-full animate-spin mx-auto mb-4"></div>
@@ -299,8 +299,7 @@ export default function CandlestickChart({
       ) : (
         <div
           ref={containerRef}
-          className="w-full"
-          style={{ height: '360px' }}
+          className="w-full flex-1"
         />
       )}
     </div>

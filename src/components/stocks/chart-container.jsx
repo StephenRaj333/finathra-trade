@@ -15,7 +15,7 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
 
             {/* Stock Info Header */}
             <div className="flex items-center justify-between flex-wrap gap-2 px-2 lg:px-4 py-1.5 bg-white">
-                <div className="flex items-center flex-wrap gap-2 lg:gap-4">
+                <div className="flex items-center flex-wrap gap-2 lg:gap-4 pt-3">
                     <div className="flex items-center gap-1.5 min-w-0 border border-[#EDE8F2] rounded-md p-2">  
                         <h3 className="font-semibold text-xs text-gray-900 truncate pr-1 lg:pr-2 border-r border-[#EDE8F2]">XAUUSD Gold/USD</h3>
                         <span className="text-xs text-gray-500 whitespace-nowrap pl-1 lg:pl-2 pr-1 lg:pr-2 border-r border-[#EDE8F2]">30 Min</span>
@@ -52,30 +52,30 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
             </div>
 
             {/* Chart Area */}
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-hidden min-h-0"> 
                 {gridLayout === 1 && (
                     <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                 )}
                 {gridLayout === 2 && (
                     <div className="flex h-full min-h-0">
-                        <div className="flex-1 border-r border-gray-200 overflow-auto min-h-0">
+                        <div className="flex-1 border-r border-gray-200 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
-                        <div className="flex-1 overflow-auto min-h-0">
+                        <div className="flex-1 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                     </div>
                 )}
                 {gridLayout === 3 && (
                     <div className="flex flex-col h-full min-h-0">
-                        <div className="flex-1 border-b border-gray-200 overflow-auto min-h-0">
+                        <div className="flex-1 border-b border-gray-200 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
-                        <div className="flex flex-1 overflow-auto min-h-0">
-                            <div className="flex-1 border-r border-gray-200 overflow-auto min-h-0">
+                        <div className="flex flex-1 overflow-hidden min-h-0">
+                            <div className="flex-1 border-r border-gray-200 overflow-hidden min-h-0">
                                 <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                             </div>
-                            <div className="flex-1 overflow-auto min-h-0">
+                            <div className="flex-1 overflow-hidden min-h-0">
                                 <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                             </div>
                         </div>
@@ -83,16 +83,16 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
                 )}
                 {gridLayout === 4 && (
                     <div className="grid grid-cols-2 grid-rows-2 h-full min-h-0">
-                        <div className="border-r border-b border-gray-200 overflow-auto min-h-0">
+                        <div className="border-r border-b border-gray-200 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
-                        <div className="border-b border-gray-200 overflow-auto min-h-0">
+                        <div className="border-b border-gray-200 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
-                        <div className="border-r border-gray-200 overflow-auto min-h-0">
+                        <div className="border-r border-gray-200 overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
-                        <div className="overflow-auto min-h-0">
+                        <div className="overflow-hidden min-h-0">
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                     </div>
