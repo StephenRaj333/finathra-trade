@@ -49,7 +49,7 @@ const OrdersNOI = () => {
                                 }`}
                             title="All Orders"
                         >
-                            <img className='w-full h-full' width={8} height={8} src="/icons/common-marker.png" alt="common marker" /> 
+                            <img className='w-full h-full max-w-[20px] max-h-[20px]' width={8} height={8} src="/icons/common-marker.png" alt="common marker" /> 
                             {/* <BarChart3 size={18} /> */}
                         </button>
                         <button
@@ -60,7 +60,7 @@ const OrdersNOI = () => {
                                 }`}
                             title="Buy Orders"
                         >
-                            <img className='w-full h-full' width={8} height={8} src="/icons/inflating.png" alt="common marker" /> 
+                            <img className='w-full h-full max-w-[20px] max-h-[20px]' width={8} height={8} src="/icons/inflating.png" alt="common marker" /> 
                         </button>
                         <button
                             onClick={() => setActiveOrderBookTab('sell')}
@@ -70,7 +70,7 @@ const OrdersNOI = () => {
                                 }`}
                             title="Sell Orders"
                         >
-                            <img className='w-full h-full' width={8} height={8} src="/icons/deflating.png" alt="common marker" /> 
+                            <img className='w-full h-full max-w-[20px] max-h-[20px]' width={8} height={8} src="/icons/deflating.png" alt="common marker" /> 
                         </button>
 
                         {/* Price Selector */}
