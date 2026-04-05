@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Resizable } from 're-resizable';
+import { SquarePlus } from 'lucide-react';
 import IndexChart from '../../components/markets/IndexChart';
 import GlobalMap from '../../components/markets/GlobalMap';
 
@@ -87,7 +88,7 @@ const MarketDataTabs = () => {
           <button
             key={tab}
             onClick={() => setActive(tab)}
-            className={`px-4 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${
+            className={`px-3 py-2 text-xs lg:text-sm font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${
               active === tab ? 'bg-white text-black' : 'text-gray-600 border-b-transparent hover:text-gray-900'
             }`}
           >
@@ -98,7 +99,8 @@ const MarketDataTabs = () => {
           <MenuIcon />
         </div>
       </div>
-      <div className="flex items-center gap-1 px-3 py-1 border-b border-gray-100 shrink-0 bg-white">
+      <div className="flex items-center justify-between p-3 border-b border-gray-100 shrink-0 bg-white">
+        <div className="left-sec">
         {['Top Gainers', 'Tab Losers'].map((tab) => (
           <button
             key={tab}
@@ -110,8 +112,11 @@ const MarketDataTabs = () => {
             {tab}
           </button>
         ))}
-        <span className="ml-auto text-xs font-semibold text-indigo-600 px-2">SLV</span>
-        <button className="text-xs text-indigo-600 border border-indigo-300 rounded px-2 py-0.5 hover:bg-indigo-50">+ Add Symbol</button>
+        </div>
+        <div className="right-sec flex gap-2.5">
+          <span className="ml-auto bg-[#EDE8F2] rounded block py-1.5 text-xs font-normal text-[#4F1D81] px-1.5 tracking-wide">SLV</span>
+          <button className="text-xs flex items-center gap-1 font-medium text-[#9E5190]"><SquarePlus size={22} strokeWidth={1.3} /> Add Symbol</button>
+        </div>  
       </div>
       <div className="flex-1 flex items-center justify-center text-gray-300 text-sm">
         Market Data Table
