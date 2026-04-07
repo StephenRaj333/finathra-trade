@@ -2,11 +2,22 @@ import { useState } from 'react';
 import CandlestickChart from './CandleChart';
 import { RotateCcw , ChevronUp } from 'lucide-react';
 import ChartToolbar from './chart-toolbar';
+import ChartSlot from './ChartSlot';
 
 
 
 const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
     const [chartType, setChartType] = useState('candles');
+    // Persist selected symbols for up to 3 extra slots (indices 0–2)
+    const [slotSymbols, setSlotSymbols] = useState([null, null, null]);
+
+    const handleSlotSelect = (slotIndex, symbol) => {
+        setSlotSymbols(prev => {
+            const next = [...prev];
+            next[slotIndex] = symbol;
+            return next; 
+        });
+    };
 
     return (
         <div className="flex flex-col h-full w-full" style={{background: 'conic-gradient(from 20deg at 48.04% 45.06%, #FFF 0deg, #FFFDF5 167.88461208343506deg, #FFFDF5 194.79776859283447deg, #FEFFFA 360deg)'}}>
@@ -23,7 +34,7 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                         <div className="flex-1 overflow-hidden min-h-0">
-                            <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                            <ChartSlot slotIndex={0} selectedSymbol={slotSymbols[0]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                     </div>
                 )}
@@ -34,10 +45,10 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
                         </div>
                         <div className="flex flex-1 overflow-hidden min-h-0">
                             <div className="flex-1 border-r border-gray-200 overflow-hidden min-h-0">
-                                <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                                <ChartSlot slotIndex={0} selectedSymbol={slotSymbols[0]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                             </div>
                             <div className="flex-1 overflow-hidden min-h-0">
-                                <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                                <ChartSlot slotIndex={1} selectedSymbol={slotSymbols[1]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                             </div>
                         </div>
                     </div>
@@ -48,13 +59,13 @@ const ChartContainer = ({ gridLayout = 1, onGridChange }) => {
                             <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                         <div className="border-b border-gray-200 overflow-hidden min-h-0">
-                            <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                            <ChartSlot slotIndex={0} selectedSymbol={slotSymbols[0]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                         <div className="border-r border-gray-200 overflow-hidden min-h-0">
-                            <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                            <ChartSlot slotIndex={1} selectedSymbol={slotSymbols[1]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                         <div className="overflow-hidden min-h-0">
-                            <CandlestickChart symbol="XAUUSD" chartType={chartType} onChartTypeChange={setChartType} />
+                            <ChartSlot slotIndex={2} selectedSymbol={slotSymbols[2]} onSelect={handleSlotSelect} chartType={chartType} onChartTypeChange={setChartType} />
                         </div>
                     </div>
                 )}

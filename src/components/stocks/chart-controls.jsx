@@ -94,7 +94,7 @@ const ChartControls = () => {
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         onKeyDown={handleKeyDown}
                                         placeholder="Symbol/Name"
-                                        className="font-medium text-sm text-gray-700 outline-none bg-transparent flex-1 placeholder:text-[#C79BBF] placeholder:font-normal transition-all duration-200"
+                                        className="font-medium text-xs text-gray-700 outline-none bg-transparent flex-1 placeholder:text-[#C79BBF] placeholder:font-normal transition-all duration-200"
                                         autoFocus
                                     />
                                 </div>
