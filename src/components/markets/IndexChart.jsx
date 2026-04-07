@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { createChart, LineSeries } from 'lightweight-charts';
+import { createChart, LineSeries, ColorType } from 'lightweight-charts';
 
 const TABS = ['Index Chart', 'Yield Curves', 'Net Inflow', 'Market Overview'];
 
@@ -98,7 +98,7 @@ export default function IndexChart() {
       width: chartContainerRef.current.clientWidth,
       height: chartContainerRef.current.clientHeight,
       layout: {
-        background: { color: '#ffffff' },
+        background: { type: ColorType.Solid, color: 'rgba(0, 0, 0, 0)' }, 
         textColor: '#9ca3af',
         fontSize: 11,
         fontFamily: 'Inter, sans-serif',
@@ -163,7 +163,7 @@ export default function IndexChart() {
     <div className="flex flex-col h-full overflow-hidden">
 
       {/* ── Tab Bar ── */}
-      <div className="flex items-center border-b border-gray-200 shrink-0"> 
+      <div className="flex items-center border-b border-gray-200 shrink-0 bg-[#f7f7f7]">  
         {TABS.map((tab) => (
           <button
             key={tab}
@@ -191,14 +191,14 @@ export default function IndexChart() {
       <div className="flex flex-1 overflow-hidden">
 
         {/* Left – stock list */}
-        <div className="w-full max-w-[170px] hide-scrollbar shrink-0 flex flex-col gap-2 overflow-y-auto border-r border-gray-100 bg-white p-2">
+        <div className="w-full max-w-[170px] hide-scrollbar shrink-0 flex flex-col gap-2 overflow-y-auto border-r border-gray-100 p-2">
           {stocks.map((s) => {
             const isSelected = selectedStock === s.id;
             return (
               <button
                 key={s.id}
                 onClick={() => setSelectedStock(s.id)}
-                className={`w-full text-left px-3 py-3 border bg-[#EDE8F280] rounded-lg transition-all ${
+                className={`w-full text-left px-3 py-3 border bg-[rgba(237,232,242,0.50)] rounded-lg transition-all ${
                   isSelected
                     ? 'border-[#AE6DA2]'
                     : 'border-transparent'

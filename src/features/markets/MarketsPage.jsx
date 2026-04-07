@@ -184,7 +184,8 @@ const MarketsPage = () => {
             const pct = (ref.clientWidth / containerWidth) * 100;
             setCol1Width(Math.max(15, Math.min(65, pct)));
           }}
-          className="bg-white border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
+          className="border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
+          style={{background: 'linear-gradient(78deg, #FFF 12.93%, #FFFDF4 33.04%, #FFFEFB 64.09%, #FFF 88.77%)'}}
         >
           <IndexChart />
         </Resizable>
@@ -203,13 +204,13 @@ const MarketsPage = () => {
             const pct = (ref.clientWidth / containerWidth) * 100;
             setCol2Width(Math.max(15, Math.min(60, pct)));
           }}
-          className="bg-white border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
+          className="border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
         >
           <GlobalMap />
         </Resizable>
 
         {/* Top Col 3 – 3/10 (fills remaining) */}
-        <div className="flex-1 bg-white border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col min-w-[15%]">
+        <div className="flex-1 border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col min-w-[15%]">
           {/* Tab bar */}
           <NewsQuotesTabs />
         </div>
@@ -232,13 +233,13 @@ const MarketsPage = () => {
             const pct = (ref.clientWidth / containerWidth) * 100;
             setBotCol1Width(Math.max(20, Math.min(85, pct)));
           }}
-          className="bg-white border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
+          className="border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col"
         >
           <MarketDataTabs />
         </Resizable>
 
         {/* Bottom Col 2 – 3/10 (fills remaining) */}
-        <div className="flex-1 bg-white border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col min-w-[15%]">
+        <div className="flex-1 border-2 border-[#EDE8F2] rounded-lg overflow-hidden flex flex-col min-w-[15%]">
           <TradeTabs />
         </div>
       </div>
