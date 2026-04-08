@@ -254,7 +254,7 @@ export const CandlesOutline = ({ color = "#8968AB" }) => {
 
 
 export const NIcon = ({ color = "#8968AB" }) => {
-    return ( 
+    return (
         <svg width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.11719 18L8.49814 4.35833C8.83109 3.51425 10.0257 3.51425 10.3586 4.35833L14.8094 15.6417C15.1423 16.4858 16.3369 16.4858 16.6699 15.6417L22.0508 2" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
             <rect x="2" y="8.35181" width="21.3333" height="2.56719" rx="1.23486" fill="#EDE8F2" />
@@ -347,12 +347,27 @@ export const DeleteIcon = ({ color = "#8968AB" }) => {
 }
 
 
-export const UploadIcon = ({color = "#8968AB" }) => {
+export const UploadIcon = ({ color = "#8968AB" }) => {
     return (
         <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.332 13.5584L11.7788 10.0052M11.7788 10.0052L8.2255 13.5584M11.7788 10.0052L11.7788 18" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M19.6677 15.415C20.44 14.872 21.0191 14.0969 21.3211 13.2024C21.6231 12.3078 21.6321 11.3404 21.347 10.4403C21.0618 9.54028 20.4973 8.75453 19.7353 8.19709C18.9733 7.63964 18.0535 7.33951 17.1093 7.34025H15.9901C15.7229 6.29903 15.223 5.33199 14.528 4.51192C13.833 3.69186 12.961 3.04014 11.9777 2.60584C10.9944 2.17153 9.92539 1.96596 8.85113 2.00459C7.77688 2.04322 6.72538 2.32506 5.77581 2.82887C4.82623 3.33268 4.00332 4.04535 3.36903 4.91322C2.73474 5.78109 2.3056 6.78154 2.11391 7.83926C1.92222 8.89698 1.97297 9.98441 2.26236 11.0197C2.55175 12.0549 3.07222 13.0111 3.7846 13.8161" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg> 
+        </svg>
     )
 }
 
+export const HamburgerIcon = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 8H17M7 12H12M7 16H17" stroke="#28303F" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+    )
+}   
+
+export const ArrowDown = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
+            <path d="M10 0L5 5L4.37114e-07 -8.74228e-07L10 0Z" fill="#616161" />
+        </svg>  
+    )   
+}   
