@@ -177,6 +177,9 @@ export default function HeatMap() {
   const [sortOpen, setSortOpen] = useState(false);
   const [timeframeOpen, setTimeframeOpen] = useState(false);
 
+  // Trigger to (re)apply chart options after init
+  const [applyOptions, setApplyOptions] = useState(0);
+
   // ECharts ref
   const chartContainerRef = useRef(null);
   const chartInstance = useRef(null);
@@ -197,14 +200,41 @@ export default function HeatMap() {
     }));
   }, [selectedIndustry, sortBy, timeframe]);
 
-  /* ── Init / update ECharts ── */
+  /* ── Init ECharts (deferred so container has real dimensions) ── */
   useEffect(() => {
     if (!chartContainerRef.current) return;
+    let rafId;
+    const container = chartContainerRef.current;
 
-    // Init once
-    if (!chartInstance.current) {
-      chartInstance.current = echarts.init(chartContainerRef.current);
-    }
+    const init = () => {
+      if (!chartInstance.current) {
+        chartInstance.current = echarts.init(container);
+      }
+    };
+
+    // Defer to after layout paint, then apply current options
+    rafId = requestAnimationFrame(() => {
+      init();
+      chartInstance.current?.resize();
+      // Trigger initial option render now that chart exists
+      setApplyOptions((n) => n + 1);
+    });
+
+    const observer = new ResizeObserver(() => {
+      if (!chartInstance.current) init();
+      chartInstance.current?.resize();
+    });
+    observer.observe(container);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
+  }, []);
+
+  /* ── Update options when data changes ── */
+  useEffect(() => {
+    if (!chartInstance.current) return;
 
     const treeData = buildTreemapData();
 
@@ -265,19 +295,8 @@ export default function HeatMap() {
     };
 
     chartInstance.current.setOption(option, true);
-    // Ensure chart fills container after option update
     chartInstance.current.resize();
-  }, [buildTreemapData]);
-
-  /* ── Resize observer ── */
-  useEffect(() => {
-    if (!chartContainerRef.current) return;
-    const observer = new ResizeObserver(() => {
-      chartInstance.current?.resize();
-    });
-    observer.observe(chartContainerRef.current);
-    return () => observer.disconnect();
-  }, []);
+  }, [buildTreemapData, applyOptions]); 
 
   /* ── Cleanup ── */
   useEffect(() => {
@@ -288,15 +307,15 @@ export default function HeatMap() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden heatmap-container">  
 
       {/* ── Tabs ── */}
-      <div className="flex items-center border-b border-gray-200 bg-[#f7f7f7] shrink-0">
+      <div className="flex items-center border-b border-[#E0E0E4] bg-[#f7f7f7] shrink-0">
         {mainTabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setMainTab(tab)}
-            className={`px-4 py-2 text-xs font-medium border-r border-[#C8B9D8] rounded-tr-lg transition-all whitespace-nowrap ${
+            className={`px-4 py-2 text-xs font-medium border-r border-[#E0E0E4] rounded-tr-lg transition-all whitespace-nowrap ${
               mainTab === tab
                 ? 'bg-white text-black'
                 : 'text-gray-600 border-b-transparent hover:text-gray-900'
