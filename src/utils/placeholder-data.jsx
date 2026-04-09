@@ -102,3 +102,109 @@ export const chartsymbolNameSuggestions = [
     { symbol: 'BRENTUSD', name: 'Brent Crude Oil' },
     { symbol: 'SP500', name: 'S&P 500 Index' },
 ];
+
+
+export const HEATMAP_DATA = { 
+  'Healthcare Providers': [
+    { name: 'UNH', value: 4800, change: 1.23, market: 'Stock Market', region: 'North America' },
+    { name: 'CVS', value: 1200, change: 0.44, market: 'Stock Market', region: 'North America' },
+    { name: 'HCA', value: 800, change: -0.22, market: 'Stock Market', region: 'North America' },
+    { name: 'CNC', value: 600, change: 0.88, market: 'Stock Market', region: 'Asia Pacific' },
+    { name: 'ELV', value: 900, change: 0.15, market: 'Stock Market', region: 'Europe' },
+    { name: 'HUM', value: 500, change: -0.65, market: 'Stock Market', region: 'North America' },
+  ],
+  'Communications & Ne...': [
+    { name: 'CSCO', value: 2200, change: 0.15, market: 'Stock Market', region: 'North America' },
+    { name: 'CMCSA', value: 1600, change: 0.33, market: 'Stock Market', region: 'North America' },
+    { name: 'T', value: 1400, change: -0.18, market: 'Stock Market', region: 'North America' },
+    { name: 'VZ', value: 1100, change: 0.05, market: 'Stock Market', region: 'North America' },
+    { name: 'NFLX', value: 2800, change: 0.77, market: 'Stock Market', region: 'North America' },
+    { name: 'DIS', value: 1800, change: 0.42, market: 'Stock Market', region: 'North America' },
+  ],
+  'Semiconductors & Se...': [
+    { name: 'NVDA', value: 3200, change: 0.26, market: 'Stock Market', region: 'North America' },
+    { name: 'TSM', value: 2800, change: 1.04, market: 'Stock Market', region: 'Asia Pacific' },
+    { name: 'AVGO', value: 2400, change: 6.21, market: 'Stock Market', region: 'North America' },
+    { name: 'AMD', value: 1200, change: 0.55, market: 'Stock Market', region: 'North America' },
+    { name: 'INTC', value: 1100, change: -0.45, market: 'Stock Market', region: 'North America' },
+    { name: 'KLAC', value: 900, change: 0.33, market: 'Stock Market', region: 'North America' },
+    { name: 'ASML', value: 1500, change: 0.82, market: 'Stock Market', region: 'Europe' },
+    { name: 'AMAT', value: 800, change: 0.28, market: 'Stock Market', region: 'North America' },
+    { name: 'LRCX', value: 700, change: 0.12, market: 'Stock Market', region: 'North America' },
+    { name: 'QCOM', value: 1400, change: 0.19, market: 'Stock Market', region: 'North America' },
+    { name: 'MRVL', value: 500, change: -0.35, market: 'Stock Market', region: 'North America' },
+    { name: 'MU', value: 600, change: 0.44, market: 'Stock Market', region: 'Asia Pacific' },
+  ],
+  'Electronic Equipment ...': [
+    { name: 'APH', value: 900, change: 0.66, market: 'Stock Market', region: 'North America' },
+    { name: 'GLW', value: 500, change: 0.22, market: 'Stock Market', region: 'North America' },
+    { name: 'TEL', value: 700, change: -0.11, market: 'Stock Market', region: 'Asia Pacific' },
+    { name: 'KEYS', value: 400, change: 0.33, market: 'Stock Market', region: 'North America' },
+  ],
+  'Oil & Gas Related Equi...': [
+    { name: 'SLB', value: 800, change: -0.22, market: 'Commodities', region: 'Global' },
+    { name: 'BKR', value: 600, change: 0.35, market: 'Commodities', region: 'North America' },
+    { name: 'HAL', value: 500, change: 0.11, market: 'Commodities', region: 'North America' },
+    { name: 'FTI', value: 300, change: -0.55, market: 'Commodities', region: 'Europe' },
+  ],
+  'Natural Gas Utilities': [
+    { name: 'LNG', value: 1200, change: 0.44, market: 'Commodities', region: 'Global' },
+    { name: 'KINDER', value: 800, change: 0.18, market: 'Commodities', region: 'North America' },
+    { name: 'WMB', value: 700, change: 0.55, market: 'Commodities', region: 'North America' },
+    { name: 'OKE', value: 500, change: -0.12, market: 'Commodities', region: 'North America' },
+  ],
+  'Software & IT Services': [
+    { name: 'MSFT', value: 3100, change: 0.88, market: 'Stock Market', region: 'North America' },
+    { name: 'ORCL', value: 1800, change: 0.45, market: 'Stock Market', region: 'North America' },
+    { name: 'CRM', value: 1400, change: -0.33, market: 'Stock Market', region: 'North America' },
+    { name: 'NOW', value: 1100, change: 0.66, market: 'Stock Market', region: 'North America' },
+    { name: 'ADBE', value: 1300, change: 0.22, market: 'Stock Market', region: 'North America' },
+    { name: 'INTU', value: 900, change: 0.55, market: 'Stock Market', region: 'North America' },
+  ],
+  'Oil & Gas': [
+    { name: 'CVX', value: 2800, change: 0.77, market: 'Commodities', region: 'North America' },
+    { name: 'XOM', value: 3200, change: 0.55, market: 'Commodities', region: 'North America' },
+    { name: 'COP', value: 1700, change: 0.12, market: 'Commodities', region: 'North America' },
+    { name: 'EOG', value: 800, change: -0.33, market: 'Commodities', region: 'North America' },
+    { name: 'PXD', value: 600, change: 0.28, market: 'Commodities', region: 'North America' },
+  ],
+  'Electric Utilities & IPPs': [
+    { name: 'NEE', value: 1600, change: 0.44, market: 'Stock Market', region: 'North America' },
+    { name: 'DUK', value: 1200, change: 0.18, market: 'Stock Market', region: 'North America' },
+    { name: 'SO', value: 1000, change: -0.22, market: 'Stock Market', region: 'North America' },
+    { name: 'GEV', value: 700, change: 0.33, market: 'Stock Market', region: 'North America' },
+  ],
+  'Metals & Mining': [
+    { name: 'BHP', value: 1800, change: 0.55, market: 'Commodities', region: 'Asia Pacific' },
+    { name: 'RIO', value: 1500, change: 0.33, market: 'Commodities', region: 'Global' },
+    { name: 'NEM', value: 900, change: -0.44, market: 'Commodities', region: 'North America' },
+    { name: 'FCX', value: 700, change: 0.22, market: 'Commodities', region: 'North America' },
+    { name: 'VALE', value: 600, change: -0.18, market: 'Commodities', region: 'Emerging Markets' },
+  ],
+};
+
+export const BEST_PERFORMING_INDUSTRIES = [
+  { name: 'Semiconductors', value: 3500, change: 8.45 },
+  { name: 'Software & IT', value: 3200, change: 7.22 },
+  { name: 'Communication', value: 2800, change: 5.67 },
+  { name: 'Healthcare', value: 2600, change: 4.89 },
+  { name: 'Energy', value: 2400, change: 4.12 },
+  { name: 'Financials', value: 2200, change: 3.34 },
+  { name: 'Consumer Disc', value: 1900, change: 2.78 },
+  { name: 'Industrials', value: 1700, change: 1.95 },
+  { name: 'Utilities', value: 1500, change: 0.88 },
+  { name: 'Real Estate', value: 1200, change: -0.45 },
+];
+
+export const MOST_POPULAR_ETFS = [
+  { name: 'SPY', value: 5200, change: 3.45 },
+  { name: 'QQQ', value: 4800, change: 5.67 },
+  { name: 'IWM', value: 3200, change: 2.34 },
+  { name: 'EEM', value: 2800, change: -1.23 },
+  { name: 'GLD', value: 2400, change: 4.56 },
+  { name: 'TLT', value: 2100, change: -2.34 },
+  { name: 'XLF', value: 1900, change: 1.78 },
+  { name: 'XLV', value: 1800, change: 2.89 },
+  { name: 'XLE', value: 1600, change: 6.12 },
+  { name: 'XLI', value: 1400, change: 0.56 },
+];
