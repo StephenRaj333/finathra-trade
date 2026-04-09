@@ -90,6 +90,8 @@ export default function IndexChart() {
   const [selectedStock, setSelectedStock] = useState('dow');
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
+  const tooltipRef = useRef(null);
+  const seriesRefs = useRef([]);
 
   useEffect(() => {
     if (!chartContainerRef.current) return;
@@ -128,7 +130,7 @@ export default function IndexChart() {
       handleScale: true,
     });
 
-    seriesConfigs.forEach(({ color, lineWidth, data }) => {
+    seriesRefs.current = seriesConfigs.map(({ color, lineWidth, data }) => {
       const series = chart.addSeries(LineSeries, {
         color,
         lineWidth,
@@ -138,10 +140,60 @@ export default function IndexChart() {
         crosshairMarkerRadius: 4,
       });
       series.setData(data);
+      return series;
     });
 
     chart.timeScale().fitContent();
     chartRef.current = chart;
+
+    // ── Custom tooltip on crosshair move ──
+    chart.subscribeCrosshairMove((param) => {
+      const tooltip = tooltipRef.current;
+      if (!tooltip) return;
+
+      if (!param || !param.time || !param.point ||
+          param.point.x < 0 || param.point.y < 0) {
+        tooltip.style.display = 'none';
+        return;
+      }
+
+      const containerRect = chartContainerRef.current.getBoundingClientRect();
+      const values = seriesRefs.current.map((s, i) => {
+        const d = param.seriesData.get(s);
+        return { color: seriesConfigs[i].color, value: d?.value ?? null };
+      });
+
+      const labels = ['Dow Jones', 'S&P 500', 'NASDAQ'];
+      const date = typeof param.time === 'string'
+        ? param.time
+        : new Date(param.time * 1000).toISOString().split('T')[0];
+
+      tooltip.innerHTML = `
+        <div style="font-size:10px;font-weight:600;color:#374151;margin-bottom:5px;border-bottom:1px solid #f3f4f6;padding-bottom:4px">${date}</div>
+        ${values.map((v, i) => `
+          <div style="display:flex;align-items:center;gap:6px;margin-top:3px">
+            <span style="width:8px;height:8px;border-radius:50%;background:${v.color};flex-shrink:0"></span>
+            <span style="font-size:10px;color:#6b7280;flex:1">${labels[i]}</span>
+            <span style="font-size:10px;font-weight:600;color:#111827">${v.value !== null ? v.value.toFixed(2) + '%' : '—'}</span>
+          </div>
+        `).join('')}
+      `;
+
+      tooltip.style.display = 'block';
+
+      const tooltipWidth = 160;
+      const tooltipHeight = tooltip.offsetHeight;
+      let left = param.point.x + 12;
+      let top = param.point.y - tooltipHeight / 2;
+
+      if (left + tooltipWidth > containerRect.width) {
+        left = param.point.x - tooltipWidth - 12;
+      }
+      top = Math.max(4, Math.min(top, containerRect.height - tooltipHeight - 4));
+
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
+    });
 
     const resizeObserver = new ResizeObserver(() => {
       if (chartContainerRef.current) {
@@ -220,7 +272,24 @@ export default function IndexChart() {
         </div>
 
         {/* Right – chart */}
-        <div className="flex-1 overflow-hidden relative" ref={chartContainerRef} />
+        <div className="flex-1 overflow-hidden relative" ref={chartContainerRef}>
+          {/* Custom tooltip */}
+          <div
+            ref={tooltipRef}
+            style={{
+              display: 'none',
+              position: 'absolute',
+              zIndex: 10,
+              pointerEvents: 'none',
+              background: '#fff',
+              border: '1px solid #E0E0E4',
+              borderRadius: '6px',
+              padding: '8px 10px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+              minWidth: '160px',
+            }}
+          />
+        </div>
       </div>
     </div>
   );
