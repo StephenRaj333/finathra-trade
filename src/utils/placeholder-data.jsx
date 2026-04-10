@@ -90,21 +90,21 @@ export const newsData = [
   }
 ];
 
-export const chartsymbolNameSuggestions = [ 
-    { symbol: 'EURUSD', name: 'Euro / US Dollar' },
-    { symbol: 'GBPUSD', name: 'British Pound / US Dollar' },
-    { symbol: 'USDJPY', name: 'US Dollar / Japanese Yen' },
-    { symbol: 'AUDUSD', name: 'Australian Dollar / US Dollar' },
-    { symbol: 'NZDUSD', name: 'New Zealand Dollar / US Dollar' },
-    { symbol: 'USDCAD', name: 'US Dollar / Canadian Dollar' },
-    { symbol: 'XAUUSD', name: 'Gold / US Dollar' },
-    { symbol: 'XAGUSD', name: 'Silver / US Dollar' },
-    { symbol: 'BRENTUSD', name: 'Brent Crude Oil' },
-    { symbol: 'SP500', name: 'S&P 500 Index' },
+export const chartsymbolNameSuggestions = [
+  { symbol: 'EURUSD', name: 'Euro / US Dollar' },
+  { symbol: 'GBPUSD', name: 'British Pound / US Dollar' },
+  { symbol: 'USDJPY', name: 'US Dollar / Japanese Yen' },
+  { symbol: 'AUDUSD', name: 'Australian Dollar / US Dollar' },
+  { symbol: 'NZDUSD', name: 'New Zealand Dollar / US Dollar' },
+  { symbol: 'USDCAD', name: 'US Dollar / Canadian Dollar' },
+  { symbol: 'XAUUSD', name: 'Gold / US Dollar' },
+  { symbol: 'XAGUSD', name: 'Silver / US Dollar' },
+  { symbol: 'BRENTUSD', name: 'Brent Crude Oil' },
+  { symbol: 'SP500', name: 'S&P 500 Index' },
 ];
 
 
-export const HEATMAP_DATA = { 
+export const HEATMAP_DATA = {
   'Healthcare Providers': [
     { name: 'UNH', value: 4800, change: 1.23, market: 'Stock Market', region: 'North America' },
     { name: 'CVS', value: 1200, change: 0.44, market: 'Stock Market', region: 'North America' },
@@ -209,7 +209,7 @@ export const MOST_POPULAR_ETFS = [
   { name: 'XLI', value: 1400, change: 0.56 },
 ];
 
-export const BUBBLE_DATA = { 
+export const BUBBLE_DATA = {
   'PE/PB': {
     '1Y': [
       { name: 'Healthcare', pe: 15, pb: 10, size: 14, highlighted: false },
@@ -274,7 +274,7 @@ export const BUBBLE_DATA = {
       { name: 'Industrials', pe: 62, pb: 48, size: 20, highlighted: false },
     ],
   },
-}; 
+};
 
 
 export const HISTORY_DATA = {
@@ -381,3 +381,22 @@ export const HISTORY_DATA = {
     },
   },
 };
+
+
+export const gainersData = [ 
+  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '+135.67%', volume: '206.13%', marketCap: '19.16M' },
+  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '+142.30%', volume: '230.50%', marketCap: '30.12M' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M' },
+];
+
+export const losersData = [
+  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '-135.67%', volume: '206.13%', marketCap: '19.16M' },
+  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '-142.30%', volume: '230.50%', marketCap: '30.12M' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M' },
+]; 
