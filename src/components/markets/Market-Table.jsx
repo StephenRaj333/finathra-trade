@@ -1,8 +1,93 @@
-import {useState} from 'react';
+import {useState, useRef, useEffect, useCallback} from 'react';
 import { SquareCheckBig } from 'lucide-react';
 import { ArrowDown, HamburgerIcon } from "../../utils/SvgCode";
 import { gainersData, losersData } from '../../utils/placeholder-data'; 
 import { MenuIcon } from '../../utils/SvgCode';
+import * as echarts from 'echarts/core';
+import { LineChart } from 'echarts/charts';
+import { GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { CandlePopup } from './CandlePopup';
+
+echarts.use([LineChart, GridComponent, CanvasRenderer]);
+
+// Generate random sparkline data for each row
+const generateSparklineData = () => {
+  const points = [];
+  let value = 10 + Math.random() * 10;
+  for (let i = 0; i < 20; i++) {
+    value += (Math.random() - 0.45) * 2;
+    points.push(parseFloat(value.toFixed(2)));
+  }
+  return points;
+};
+
+// Generate random OHLC candle data
+const generateCandleData = () => {
+  const data = [];
+  const baseTime = new Date('2026-03-30T09:30:00');
+  let close = 4510.95;
+  for (let i = 0; i < 50; i++) {
+    const time = new Date(baseTime.getTime() + i * 30 * 60 * 1000);
+    const open = close + (Math.random() - 0.48) * 15;
+    const high = Math.max(open, close) + Math.random() * 10;
+    const low = Math.min(open, close) - Math.random() * 10;
+    close = open + (Math.random() - 0.45) * 20;
+    data.push({
+      time: Math.floor(time.getTime() / 1000),
+      open: parseFloat(open.toFixed(2)),
+      high: parseFloat(high.toFixed(2)),
+      low: parseFloat(low.toFixed(2)),
+      close: parseFloat(close.toFixed(2)),
+    });
+  }
+  return data;
+};
+
+// Pre-generate data so it doesn't change on re-render
+const sparklineCache = new Map();
+const candleCache = new Map();
+const getSparklineData = (key) => {
+  if (!sparklineCache.has(key)) sparklineCache.set(key, generateSparklineData());
+  return sparklineCache.get(key);
+};
+const getCandleData = (key) => {
+  if (!candleCache.has(key)) candleCache.set(key, generateCandleData());
+  return candleCache.get(key);
+};
+
+/* ── Sparkline mini-chart (ECharts) ── */
+const SparklineChart = ({ dataKey, isGainers }) => {
+  const chartRef = useRef(null);
+  const instanceRef = useRef(null);
+
+  useEffect(() => {
+    if (!chartRef.current) return;
+    const chart = echarts.init(chartRef.current);
+    instanceRef.current = chart;
+    const data = getSparklineData(dataKey);
+    chart.setOption({
+      grid: { top: 0, right: 0, bottom: 0, left: 0 },
+      xAxis: { type: 'category', show: false, data: data.map((_, i) => i) },
+      yAxis: { type: 'value', show: false, min: Math.min(...data) - 1, max: Math.max(...data) + 1 },
+      series: [{
+        type: 'line',
+        data,
+        smooth: true,
+        symbol: 'none',
+        lineStyle: { color: isGainers ? '#17B667' : '#ef4444', width: 1.5 },
+        areaStyle: undefined,
+      }],
+      animation: false,
+    });
+    return () => chart.dispose();
+  }, [dataKey, isGainers]);
+
+  return <div ref={chartRef} style={{ width: 80, height: 28 }} />;
+};
+
+// Popup height for positioning above
+const POPUP_HEIGHT = 430;
 
 const MarketDataTabs = () => {   
   const [active, setActive] = useState('Tops');
@@ -13,8 +98,36 @@ const MarketDataTabs = () => {
   const isGainers = subActive === 'Top Gainers';
   const changeColor = isGainers ? 'text-green-500' : 'text-red-500';
 
+  // Popup hover state
+  const [popup, setPopup] = useState({ visible: false, row: null, position: { top: 0, left: 0 } });
+  const hoverTimeout = useRef(null);
+
+  const handleSparklineEnter = useCallback((e, row) => {
+    clearTimeout(hoverTimeout.current);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const top = rect.top - POPUP_HEIGHT - 8;
+    const clampedTop = Math.max(8, top); // don't go above viewport
+    setPopup({
+      visible: true,
+      row,
+      position: { top: clampedTop, left: Math.min(rect.left - 100, window.innerWidth - 540) },
+    });
+  }, []);
+
+  const handleSparklineLeave = useCallback(() => {
+    hoverTimeout.current = setTimeout(() => setPopup(p => ({ ...p, visible: false })), 300);
+  }, []);
+
+  const handlePopupEnter = useCallback(() => {
+    clearTimeout(hoverTimeout.current);
+  }, []);
+
+  const handlePopupLeave = useCallback(() => {
+    hoverTimeout.current = setTimeout(() => setPopup(p => ({ ...p, visible: false })), 300);
+  }, []);
+
   return (
-    <div className="flex flex-col h-full overflow-hidden"> 
+    <div className="flex flex-col h-full overflow-hidden">
       <div className="flex items-center border-b border-gray-200 bg-[#f7f7f7] shrink-0 overflow-x-auto scrollbar-none">
         {mainTabs.map((tab) => (
           <button
@@ -91,15 +204,12 @@ const MarketDataTabs = () => {
                     <td className="px-4 py-2 text-[#616161] font-normal">{row.symbol}</td>
                     <td className="px-4 py-2 text-[#616161] font-normal">{row.name}</td>
                     <td className="px-4 py-2 text-[#17B667] font-normal">{row.price}</td>
-                    <td className="px-4 py-2">
-                      <svg width="60" height="20" viewBox="0 0 60 20" className="h-5">
-                        <polyline
-                          points="0,15 10,10 20,5 30,8 40,3 50,6 60,2"
-                          fill="none"
-                          stroke={isGainers ? '#17B667' : '#ef4444'}
-                          strokeWidth="1.5"
-                        />
-                      </svg>
+                    <td
+                      className="px-4 py-2"
+                      onMouseEnter={(e) => handleSparklineEnter(e, row)}
+                      onMouseLeave={handleSparklineLeave}
+                    >
+                      <SparklineChart dataKey={`${subActive}-${idx}`} isGainers={isGainers} />
                     </td>
                     <td className={`px-4 py-2 font-medium ${changeColor}`}>
                       {row.change}
@@ -114,6 +224,17 @@ const MarketDataTabs = () => {
         </div>
 
       </div>
+
+      {/* Candle Popup on Sparkline Hover */}
+      {popup.row && (
+        <CandlePopup
+          row={popup.row}
+          position={popup.position}
+          visible={popup.visible}
+          onMouseEnter={handlePopupEnter}
+          onMouseLeave={handlePopupLeave}
+        />
+      )}
     </div>
   );
 };
