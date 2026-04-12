@@ -1,8 +1,9 @@
 import {useState, useRef, useEffect, useCallback} from 'react';
 import { SquareCheckBig } from 'lucide-react';
 import { ArrowDown, HamburgerIcon } from "../../utils/SvgCode";
-import { gainersData, losersData } from '../../utils/placeholder-data'; 
-import { MenuIcon } from '../../utils/SvgCode';
+import { gainersData, losersData, DEFAULT_VISIBLE_IDS, ALL_COLUMN_IDS, COLUMN_LABELS, MARKET_TABLE_COLUMNS } from '../../utils/placeholder-data'; 
+import { MenuIcon } from '../../utils/SvgCode'; 
+import TableControls from './Table-Controls-Popup';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
@@ -98,6 +99,23 @@ const MarketDataTabs = () => {
   const isGainers = subActive === 'Top Gainers';
   const changeColor = isGainers ? 'text-green-500' : 'text-red-500';
 
+  // Visible columns (controlled by table-controls dropdown)
+  const [visibleColumns, setVisibleColumns] = useState(() => new Set(DEFAULT_VISIBLE_IDS));
+
+  // Table controls modal — smooth open/close
+  const [showTableControls, setShowTableControls] = useState(false);
+  const [tcVisible, setTcVisible] = useState(false);
+
+  const openControls = () => {
+    setShowTableControls(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => setTcVisible(true)));
+  };
+
+  const closeControls = useCallback(() => {
+    setTcVisible(false);
+    setTimeout(() => setShowTableControls(false), 300);
+  }, []);
+
   // Popup hover state
   const [popup, setPopup] = useState({ visible: false, row: null, position: { top: 0, left: 0 } });
   const hoverTimeout = useRef(null);
@@ -125,6 +143,36 @@ const MarketDataTabs = () => {
   const handlePopupLeave = useCallback(() => {
     hoverTimeout.current = setTimeout(() => setPopup(p => ({ ...p, visible: false })), 300);
   }, []);
+
+  // Use column configuration from placeholder-data
+  const visibleCols = ALL_COLUMN_IDS.filter(id => visibleColumns.has(id));
+  const lastColId = visibleCols[visibleCols.length - 1];
+  const thBase = "px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]";
+  const thLast = 'px-4 py-2 text-xs text-left font-medium text-black relative';
+
+  const renderTd = (colId, row, idx) => {
+    switch (colId) {
+      case 'symbol':    return <td key="symbol"    className="px-4 py-2 text-[#616161] font-normal">{row.symbol}</td>;
+      case 'name':      return <td key="name"      className="px-4 py-2 text-[#616161] font-normal">{row.name}</td>;
+      case 'pm-price':  return <td key="pm-price"  className="px-4 py-2 text-[#17B667] font-normal">{row.price}</td>;
+      case 'sparkline': return (
+        <td key="sparkline" className="px-4 py-2" 
+          onMouseEnter={(e) => handleSparklineEnter(e, row)}
+          onMouseLeave={handleSparklineLeave}
+          style={{ background: isGainers ? 'linear-gradient(180deg, #23fc3523 0%, rgba(35, 252, 46, 0) 95.55%)' : 'linear-gradient(180deg, #ef44442f 0%, rgba(35, 252, 46, 0) 95.55%)' }}
+        >
+          <SparklineChart dataKey={`${subActive}-${idx}`} isGainers={isGainers} />
+        </td>
+      );
+      case 'pct-change':   return <td key="pct-change"   className={`px-4 py-2 font-medium ${changeColor}`}>{row.change}</td>;
+      case 'volume':       return <td key="volume"       className="px-4 py-2 text-gray-700">{row.volume}</td>;
+      case 'market-cap':   return <td key="market-cap"   className="px-4 py-2 text-gray-700">{row.marketCap}</td>;
+      default: {
+        const col = MARKET_TABLE_COLUMNS.find(c => c.id === colId);
+        return <td key={colId} className="px-4 py-2 text-gray-700">{row[col?.field ?? colId] ?? '-'}</td>;
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -181,41 +229,29 @@ const MarketDataTabs = () => {
 
       {/* Table */}
       <div className="flex-1 overflow-x-auto">
-        <div className="table-wrapper flex gap-1 items-start justify-start w-full"> 
-          <div className="left-sec w-1/10"> 
-            <HamburgerIcon />
-          </div> 
+        <div className="table-wrapper flex gap-1 items-start justify-start w-full">
+          {/* Hamburger */}
+          <div className="left-sec w-1/10">
+            <div className="cursor-pointer" onClick={openControls}>
+              <HamburgerIcon />
+            </div>
+          </div>
+
           <div className="right-sec w-full">
-            <table className="w-full text-xs">
+            <table className="market-main-table w-full text-xs">
               <thead className="bg-[#EDE8F2] sticky top-0">
                 <tr>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">Symbol</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">Name</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">PM Price</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">Sparkline</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">% Change</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[16px] after:w-[1.5px] after:bg-[#AE97C5]">Volume</th>
-                  <th className="px-4 py-2 text-xs text-left font-medium text-black relative">Market Cap</th> 
-                </tr>
+                  {visibleCols.map(colId => (
+                    <th key={colId} className={colId === lastColId ? thLast : thBase}>
+                      {COLUMN_LABELS[colId]}
+                    </th>
+                  ))}
+                </tr> 
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {tableData.map((row, idx) => (
                   <tr key={idx} className="hover:bg-gray-50 transition-colors cursor-pointer">
-                    <td className="px-4 py-2 text-[#616161] font-normal">{row.symbol}</td>
-                    <td className="px-4 py-2 text-[#616161] font-normal">{row.name}</td>
-                    <td className="px-4 py-2 text-[#17B667] font-normal">{row.price}</td>
-                    <td
-                      className="px-4 py-2"
-                      onMouseEnter={(e) => handleSparklineEnter(e, row)}
-                      onMouseLeave={handleSparklineLeave}
-                    >
-                      <SparklineChart dataKey={`${subActive}-${idx}`} isGainers={isGainers} />
-                    </td>
-                    <td className={`px-4 py-2 font-medium ${changeColor}`}>
-                      {row.change}
-                    </td>
-                    <td className="px-4 py-2 text-gray-700">{row.volume}</td>
-                    <td className="px-4 py-2 text-gray-700">{row.marketCap}</td>
+                    {visibleCols.map(colId => renderTd(colId, row, idx))}
                   </tr>
                 ))}
               </tbody>
@@ -234,6 +270,30 @@ const MarketDataTabs = () => {
           onMouseEnter={handlePopupEnter}
           onMouseLeave={handlePopupLeave}
         />
+      )}
+
+      {/* Table Controls — centered modal */}
+      {showTableControls && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ease-out ${
+            tcVisible ? 'bg-black/20' : 'bg-black/0'
+          }`}
+          onClick={closeControls}
+        >
+          <div
+            className={`transition-all duration-300 ease-out ${
+              tcVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+            }`}
+            onClick={e => e.stopPropagation()}
+          >
+            <TableControls
+              tabName={active}
+              initialVisible={visibleColumns}
+              onClose={closeControls}
+              onApply={(newVis) => setVisibleColumns(newVis)}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

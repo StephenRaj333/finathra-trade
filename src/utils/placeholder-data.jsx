@@ -382,21 +382,53 @@ export const HISTORY_DATA = {
   },
 };
 
+// Market table placeholder data 
 
-export const gainersData = [ 
-  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '+135.67%', volume: '206.13%', marketCap: '19.16M' },
-  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '+142.30%', volume: '230.50%', marketCap: '30.12M' },
-  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M' },
-  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M' },
-  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M' },
-  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M' },
+// ── Market Table — Single Source of Truth ────────────────────────────────────
+// Edit ONLY this array to add, remove, reorder, or rename columns.
+// Backend: 'field' is the camelCase key in your API response object.
+// 'group' controls which panel it appears in the column-picker UI.
+// 'pinned: true' means the column is always visible and cannot be unchecked.
+// 'defaultVisible: true' means the column is shown on first load.
+export const MARKET_TABLE_COLUMNS = [
+  { id: 'symbol',             label: 'Symbol',           group: 'label', field: 'symbol',        pinned: true,  defaultVisible: true  },
+  { id: 'name',               label: 'Name',             group: 'label', field: 'name',                         defaultVisible: true  },
+  { id: 'pm-price',           label: 'PM Price',         group: 'label', field: 'price',                        defaultVisible: true  },
+  { id: 'sparkline',          label: 'Sparkline',        group: 'label', field: null,                           defaultVisible: true  },
+  { id: 'pct-change',         label: '% Change',         group: 'label', field: 'change',                       defaultVisible: true  },
+  { id: 'volume',             label: 'Volume',           group: 'label', field: 'volume',                       defaultVisible: true  },
+  { id: 'market-cap',         label: 'Market Cap',       group: 'stock', field: 'marketCap',                    defaultVisible: true  },
+  { id: 'bps',                label: 'BPS',              group: 'stock', field: 'bps',                          defaultVisible: false },
+  { id: 'dividend',           label: 'Dividend',         group: 'stock', field: 'dividend',                     defaultVisible: false },
+  { id: 'eps',                label: 'EPS',              group: 'stock', field: 'eps',                          defaultVisible: false },
+  { id: 'ex-date',            label: 'Ex-Date',          group: 'stock', field: 'exDate',                       defaultVisible: false },
+  { id: 'free-float-mkt-cap', label: 'Free Float Mkt Cap', group: 'stock', field: 'freeFloatMktCap',           defaultVisible: false },
+  { id: 'next-earnings',      label: 'Next Earnings',    group: 'stock', field: 'nextEarnings',                 defaultVisible: false },
+  { id: 'free-float',         label: 'Free Float',       group: 'stock', field: 'freeFloat',                    defaultVisible: false },
+  { id: 'pb',                 label: 'P/B',              group: 'stock', field: 'pb',                           defaultVisible: false },
+];
+
+// ── Derived — do NOT edit manually ───────────────────────────────────────────
+export const DEFAULT_VISIBLE_IDS = MARKET_TABLE_COLUMNS.filter(c => c.defaultVisible).map(c => c.id);
+export const ALL_COLUMN_IDS      = MARKET_TABLE_COLUMNS.map(c => c.id);
+export const COLUMN_LABELS       = Object.fromEntries(MARKET_TABLE_COLUMNS.map(c => [c.id, c.label]));
+export const LABEL_COLS          = MARKET_TABLE_COLUMNS.filter(c => c.group === 'label');
+export const STOCK_COLS          = MARKET_TABLE_COLUMNS.filter(c => c.group === 'stock');
+
+export const gainersData = [
+  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '+135.67%', volume: '206.13%', marketCap: '19.16M', bps: '2.34', dividend: '0.85', eps: '1.25', exDate: '2026-04-20', freeFloatMktCap: '15.8M', nextEarnings: '2026-05-15', freeFloat: '78.5%', pb: '2.45' },
+  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '+142.30%', volume: '230.50%', marketCap: '30.12M', bps: '3.12', dividend: '1.20', eps: '2.15', exDate: '2026-04-18', freeFloatMktCap: '25.3M', nextEarnings: '2026-05-10', freeFloat: '82.3%', pb: '3.12' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M', bps: '2.89', dividend: '0.95', eps: '1.85', exDate: '2026-04-22', freeFloatMktCap: '23.1M', nextEarnings: '2026-05-12', freeFloat: '80.1%', pb: '2.98' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M', bps: '4.56', dividend: '1.50', eps: '2.95', exDate: '2026-04-25', freeFloatMktCap: '28.5M', nextEarnings: '2026-05-20', freeFloat: '85.2%', pb: '3.45' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '+110.89%', volume: '250.00%', marketCap: '35.00M', bps: '4.56', dividend: '1.50', eps: '2.95', exDate: '2026-04-25', freeFloatMktCap: '28.5M', nextEarnings: '2026-05-20', freeFloat: '85.2%', pb: '3.45' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '+142.30%', volume: '240.00%', marketCap: '28.45M', bps: '2.89', dividend: '0.95', eps: '1.85', exDate: '2026-04-22', freeFloatMktCap: '23.1M', nextEarnings: '2026-05-12', freeFloat: '80.1%', pb: '2.98' },
 ];
 
 export const losersData = [
-  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '-135.67%', volume: '206.13%', marketCap: '19.16M' },
-  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '-142.30%', volume: '230.50%', marketCap: '30.12M' },
-  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M' },
-  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M' },
-  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M' },
-  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M' },
+  { symbol: 'SKYO', name: 'Sky Quarry L...', price: '5.57', change: '-135.67%', volume: '206.13%', marketCap: '19.16M', bps: '2.34', dividend: '0.85', eps: '1.25', exDate: '2026-04-20', freeFloatMktCap: '15.8M', nextEarnings: '2026-05-15', freeFloat: '78.5%', pb: '2.45' },
+  { symbol: 'Alpha Nexus', name: 'Stone Ridge...', price: '2323', change: '-142.30%', volume: '230.50%', marketCap: '30.12M', bps: '3.12', dividend: '1.20', eps: '2.15', exDate: '2026-04-18', freeFloatMktCap: '25.3M', nextEarnings: '2026-05-10', freeFloat: '82.3%', pb: '3.12' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M', bps: '2.89', dividend: '0.95', eps: '1.85', exDate: '2026-04-22', freeFloatMktCap: '23.1M', nextEarnings: '2026-05-12', freeFloat: '80.1%', pb: '2.98' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M', bps: '4.56', dividend: '1.50', eps: '2.95', exDate: '2026-04-25', freeFloatMktCap: '28.5M', nextEarnings: '2026-05-20', freeFloat: '85.2%', pb: '3.45' },
+  { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M', bps: '4.56', dividend: '1.50', eps: '2.95', exDate: '2026-04-25', freeFloatMktCap: '28.5M', nextEarnings: '2026-05-20', freeFloat: '85.2%', pb: '3.45' },
+  { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M', bps: '2.89', dividend: '0.95', eps: '1.85', exDate: '2026-04-22', freeFloatMktCap: '23.1M', nextEarnings: '2026-05-12', freeFloat: '80.1%', pb: '2.98' },
 ]; 
