@@ -548,3 +548,39 @@ export const COLUMNS = [
   { key: null, label: 'Source' },
 ];
 
+/* ──────────────────────────────────────────────────────────────────────────────
+ *  ANALYST DATA — Replace with API calls during backend integration.
+ * 
+ *  Expected API endpoints:
+ *    GET /api/analyst-rating?symbol=AAPL
+ *      → { updatedAt, overallRating, basedOnCount, breakdown: [...] }
+ *
+ *    GET /api/analyst-price-target?symbol=AAPL
+ *      → { updatedAt, high, average, low, current }
+ *
+ *  breakdown item: { label, percentage, color }
+ *    color is one of: 'strongBuy' | 'buy' | 'hold' | 'underperform' | 'sell'
+ * ────────────────────────────────────────────────────────────────────────────── */
+
+export const ANALYST_DATA = { 
+  rating: {
+    updatedAt: '04/10/2026 EDT',
+    overallRating: 'BUY',
+    basedOnCount: 48,
+    breakdown: [
+      { label: 'Strong Buy',   percentage: 52.08, color: 'strongBuy'   },
+      { label: 'Buy',          percentage: 34.50, color: 'buy'         },
+      { label: 'Hold',         percentage: 31.25, color: 'hold'        },
+      { label: 'Under-Perform', percentage: 22.08, color: 'underperform'},
+      { label: 'Sell',         percentage:  32.08, color: 'sell'        },
+    ],
+  },
+  priceTarget: {
+    updatedAt: '04/10/2026 EDT',
+    high:    350.00,
+    average: 296.33,
+    low:     205.00,
+    current: 260.48,
+  },
+};
+
