@@ -168,7 +168,7 @@ const MarketsPage = () => {
 
   // Third row column widths
   const [thirdCol1Width, setThirdCol1Width] = useState(40);
-  const [thirdCol2Width, setThirdCol2Width] = useState(30);
+  const [thirdCol2Width, setThirdCol2Width] = useState(29.5);
 
   return (
     <div className="w-full bg-white overflow-y-auto flex flex-col gap-1 p-1"> 

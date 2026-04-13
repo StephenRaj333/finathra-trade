@@ -64,7 +64,13 @@ export default function IndustryDetails() {
     if (!chartContainerRef.current) return;
     const container = chartContainerRef.current;
 
-    if (!chartInstance.current) {
+    // Always reinitialize when mainTab changes to 'Details'
+    if (mainTab === 'Details') {
+      // Dispose old instance if it exists
+      if (chartInstance.current) { 
+        chartInstance.current.dispose();
+      }
+      // Create new instance
       chartInstance.current = echarts.init(container);
     }
 
@@ -76,11 +82,11 @@ export default function IndustryDetails() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [mainTab]);
 
   /* ── Update chart when data changes ── */
   useEffect(() => {
-    if (!chartInstance.current) return;
+    if (!chartInstance.current || mainTab !== 'Details') return;
 
     const data = getData();
     const { dates = [], values = [] } = data;
@@ -176,16 +182,16 @@ export default function IndustryDetails() {
 
     chartInstance.current.setOption(option);
     chartInstance.current.resize(); 
-  }, [getData, timeframe, subTab]);
+  }, [getData, mainTab, timeframe, subTab]);
 
   /* ── Resize when switching tabs or timeframe ── */
   useEffect(() => {
-    if (mainTab === 'Details') {
-      requestAnimationFrame(() => {
+    if (mainTab === 'Details' && chartInstance.current) {
+      setTimeout(() => {
         chartInstance.current?.resize();
-      });
+      }, 0);
     }
-  }, [mainTab, subTab, timeframe]);
+  }, [mainTab]);
 
   /* ── Cleanup on unmount ── */
   useEffect(() => {
