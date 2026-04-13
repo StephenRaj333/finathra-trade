@@ -1,3 +1,4 @@
+import {Search} from 'lucide-react';
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import {SEED,REGION_LABELS,COLUMNS} from '../../utils/placeholder-data';
 const CIRC = 88;
@@ -8,16 +9,16 @@ const SELECT_ARROW = {
   backgroundPosition: 'right 8px center',
 };
 
-/* ── Brand Colors ── */
-const BRAND_PRIMARY = '#724A9A';     // Purple - Primary brand color
-const BRAND_BG = '#f7f7f7';          // Light gray - Backgrounds
-const STATUS_UP = '#ef4444';         // Red - Negative/Up yield
-const STATUS_DOWN = '#10b981';       // Green - Positive/Down yield
-const STATUS_NEUTRAL = '#2e4070';    // Dark blue - Neutral
-const STATUS_REDUCED = '#f59e0b';    // Amber - Reduced session
-const STATUS_CYAN = '#06b6d4';       // Cyan - Info
-const ACCENT_BLUE = '#3b82f6';       // Blue - Accent (data viz)
-const ACCENT_LIGHT = '#60a5fa';      // Light blue - Hover states
+// /* ── Brand Colors ── */
+// const BRAND_PRIMARY = '#724A9A';     // Purple - Primary brand color
+// const BRAND_BG = '#f7f7f7';          // Light gray - Backgrounds
+// const STATUS_UP = '#ef4444';         // Red - Negative/Up yield
+// const STATUS_DOWN = '#10b981';       // Green - Positive/Down yield
+// const STATUS_NEUTRAL = '#2e4070';    // Dark blue - Neutral
+// const STATUS_REDUCED = '#f59e0b';    // Amber - Reduced session
+// const STATUS_CYAN = '#06b6d4';       // Cyan - Info
+// const ACCENT_BLUE = '#3b82f6';       // Blue - Accent (data viz)
+// const ACCENT_LIGHT = '#60a5fa';      // Light blue - Hover states 
 
 function bondPrice(yld, matYr, coupon) {
   if (matYr <= 0) return 100;
@@ -378,7 +379,7 @@ export default function Bond() {
           <div className="w-px h-[18px] bg-[rgba(114,74,154,0.20)] mx-0.5" />
 
           <div className="relative">
-            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[11px] text-[#724A9A] pointer-events-none">🔍</span>
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[11px] text-[#724A9A] pointer-events-none"><Search size={14} /></span>
             <input
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
