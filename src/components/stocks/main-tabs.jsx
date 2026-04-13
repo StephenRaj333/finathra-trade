@@ -6,6 +6,7 @@ import News from './news';
 import Analysis from './Analysis';
 import OrderFlow from './Order-Flow'; 
 import Releases from './Releases'; 
+import Profile from './Profile';
 
 const TABS = [
     'Chart',
@@ -14,7 +15,7 @@ const TABS = [
     'Note',
     'News',
     'Comments',
-    'Financials',
+    'Profile',
     'Analysis',
     'Corp Actions',
     'Releases',
@@ -76,10 +77,8 @@ const MainTabs = ({ gridLayout = 1, onGridChange }) => {
                         Comments — coming soon
                     </div>
                 )}
-                {activeTab === 'Financials' && (
-                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
-                        Financials — coming soon
-                    </div>
+                {activeTab === 'Profile' && (
+                    <Profile /> 
                 )}
                 {activeTab === 'Analysis' && (
                     <div className='analysis-wrapper'> 

@@ -732,5 +732,56 @@ export const RELEASES_DATA = [
   },
 ];
 
+// ── Profile Data ─────────────────────────────────────────────────────────────────
+export const PROFILE_DATA = {
+  name: 'Apple Inc',
+  address: 'One Apple Park Way, CUPERTINO, CA, United States',
+  phone: '1-408-9961010',
+  industry: 'Computers, Phones & Household Electronics',
+  listingDate: '12/12/1880',
+  website: 'https://www.apple.com/',
+  summary: 'Apple Inc. designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services. Its product categories include iPhone, Mac, iPad, and Wearables, Home and Accessories. Its software platforms include iOS, iPadOS, macOS, watchOS, and tvOS. Its services include advertising, Apple Books, Apple Fitness+, Apple Music, Apple News+, and Apple TV+. Its products include iPhone 15, iPhone 15 Pro, iPhone 14, iPhone SE, MacBook Air, MacBook Pro, Mac mini, Mac Studio, Mac Pro, iPad Pro, iPad Air, AirPods, AirPods Pro, AirPods Max, Apple TV, Apple Vision Pro and others.',
+}; 
+
+// ── Key Executives Data ──────────────────────────────────────────────────────────
+export const KEY_EXECUTIVES_DATA = [
+  {
+    id: 1,
+    name: 'Tim Cook',
+    title: 'Chief Executive Officer',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+  {
+    id: 2,
+    name: 'Luca Maestri',
+    title: 'Chief Financial Officer',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+  {
+    id: 3,
+    name: 'Craig Federighi',
+    title: 'Senior Vice President, Software Engineering',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+  {
+    id: 4,
+    name: 'Katherine Adams',
+    title: 'Vice President, General Counsel',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+  {
+    id: 5,
+    name: 'Eddy Cue',
+    title: 'Senior Vice President, Services',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+  {
+    id: 6,
+    name: 'John Ternus',
+    title: 'Senior Vice President, Hardware Engineering',
+    imageUrl: 'https://via.placeholder.com/48',
+  },
+];
+
 
 
