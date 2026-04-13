@@ -3,6 +3,7 @@ import { Menu } from 'lucide-react';
 import ChartContainer from './chart-container';
 import Note from './note';
 import News from './news';
+import Analysis from './Analysis';
 
 const TABS = [
     'Chart',
@@ -79,8 +80,8 @@ const MainTabs = ({ gridLayout = 1, onGridChange }) => {
                     </div>
                 )}
                 {activeTab === 'Analysis' && (
-                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
-                        Analysis — coming soon
+                    <div className='analysis-wrapper'> 
+                        <Analysis />  
                     </div>
                 )}
                 {activeTab === 'Corp Actions' && (

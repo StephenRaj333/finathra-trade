@@ -8,6 +8,7 @@ import Portfolio from './pages/Portfolio';
 import Account from './pages/Account';
 import Contact from './pages/Contact';
 import Settings from './pages/Settings';
+import Bonds from "./pages/Bonds"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/markets" element={<Markets />} />
+          <Route path="/bonds" element={<Bonds />} /> 
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/trade" element={<Trade />} />
           <Route path="/account" element={<Account />} />

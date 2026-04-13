@@ -1,3 +1,78 @@
+// ── Global Header Search Suggestions ─────────────────────────────────────────
+// type: 'Stock' | 'Index' | 'Forex' | 'Crypto' | 'ETF' | 'Commodity'
+// exchange: exchange / market label shown in the dropdown
+export const SEARCH_SUGGESTIONS = [ 
+  // ── US Stocks ──
+  { symbol: 'AAPL',    name: 'Apple Inc.',                    type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'MSFT',    name: 'Microsoft Corporation',         type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'GOOGL',   name: 'Alphabet Inc.',                 type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'AMZN',    name: 'Amazon.com Inc.',               type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'NVDA',    name: 'NVIDIA Corporation',            type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'META',    name: 'Meta Platforms Inc.',           type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'TSLA',    name: 'Tesla Inc.',                    type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'BRK.B',   name: 'Berkshire Hathaway B',         type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'JPM',     name: 'JPMorgan Chase & Co.',         type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'V',       name: 'Visa Inc.',                     type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'UNH',     name: 'UnitedHealth Group',           type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'WMT',     name: 'Walmart Inc.',                  type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'XOM',     name: 'Exxon Mobil Corporation',      type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'MA',      name: 'Mastercard Inc.',               type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'LLY',     name: 'Eli Lilly and Company',        type: 'Stock',     exchange: 'NYSE'   },
+  { symbol: 'AVGO',    name: 'Broadcom Inc.',                 type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'AMD',     name: 'Advanced Micro Devices',       type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'COST',    name: 'Costco Wholesale',             type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'NFLX',    name: 'Netflix Inc.',                  type: 'Stock',     exchange: 'NASDAQ' },
+  { symbol: 'INTC',    name: 'Intel Corporation',             type: 'Stock',     exchange: 'NASDAQ' },
+  // ── Indian Stocks ──
+  { symbol: 'RELIANCE',name: 'Reliance Industries Ltd.',     type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'TCS',     name: 'Tata Consultancy Services',   type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'HDFCBANK',name: 'HDFC Bank Ltd.',               type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'INFY',    name: 'Infosys Ltd.',                  type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'ICICIBANK',name:'ICICI Bank Ltd.',              type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'HINDUNILVR',name:'Hindustan Unilever Ltd.',    type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'BAJFINANCE',name:'Bajaj Finance Ltd.',         type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'WIPRO',   name: 'Wipro Ltd.',                   type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'TATAMOTORS',name:'Tata Motors Ltd.',           type: 'Stock',     exchange: 'NSE'    },
+  { symbol: 'ADANIENT',name: 'Adani Enterprises Ltd.',      type: 'Stock',     exchange: 'NSE'    },
+  // ── Indices ──
+  { symbol: 'SPX',     name: 'S&P 500 Index',               type: 'Index',     exchange: 'IDXSP'  },
+  { symbol: 'NDX',     name: 'NASDAQ 100 Index',            type: 'Index',     exchange: 'IDXNASDAQ'},
+  { symbol: 'DJI',     name: 'Dow Jones Industrial Avg.',   type: 'Index',     exchange: 'IDXDJX' },
+  { symbol: 'NIFTY',   name: 'Nifty 50',                    type: 'Index',     exchange: 'NSE'    },
+  { symbol: 'SENSEX',  name: 'BSE Sensex',                  type: 'Index',     exchange: 'BSE'    },
+  { symbol: 'BANKNIFTY',name:'Bank Nifty',                  type: 'Index',     exchange: 'NSE'    },
+  { symbol: 'FTSE',    name: 'FTSE 100',                    type: 'Index',     exchange: 'LSE'    },
+  { symbol: 'DAX',     name: 'DAX 40',                      type: 'Index',     exchange: 'XETRA'  },
+  { symbol: 'NIKKEI',  name: 'Nikkei 225',                  type: 'Index',     exchange: 'JPX'    },
+  { symbol: 'HSI',     name: 'Hang Seng Index',             type: 'Index',     exchange: 'HKEX'   },
+  { symbol: 'VIX',     name: 'CBOE Volatility Index',       type: 'Index',     exchange: 'CBOE'   },
+  // ── Forex ──
+  { symbol: 'EURUSD',  name: 'Euro / US Dollar',            type: 'Forex',     exchange: 'FX'     },
+  { symbol: 'GBPUSD',  name: 'British Pound / US Dollar',  type: 'Forex',     exchange: 'FX'     },
+  { symbol: 'USDJPY',  name: 'US Dollar / Japanese Yen',   type: 'Forex',     exchange: 'FX'     },
+  { symbol: 'USDINR',  name: 'US Dollar / Indian Rupee',   type: 'Forex',     exchange: 'FX'     },
+  { symbol: 'AUDUSD',  name: 'Australian Dollar / USD',    type: 'Forex',     exchange: 'FX'     },
+  { symbol: 'USDCAD',  name: 'US Dollar / Canadian Dollar',type: 'Forex',     exchange: 'FX'     },
+  // ── Crypto ──
+  { symbol: 'BTC',     name: 'Bitcoin',                      type: 'Crypto',    exchange: 'Crypto' },
+  { symbol: 'ETH',     name: 'Ethereum',                     type: 'Crypto',    exchange: 'Crypto' },
+  { symbol: 'BNB',     name: 'BNB (Binance)',                type: 'Crypto',    exchange: 'Crypto' },
+  { symbol: 'SOL',     name: 'Solana',                       type: 'Crypto',    exchange: 'Crypto' },
+  { symbol: 'XRP',     name: 'XRP (Ripple)',                 type: 'Crypto',    exchange: 'Crypto' },
+  { symbol: 'DOGE',    name: 'Dogecoin',                     type: 'Crypto',    exchange: 'Crypto' },
+  // ── ETFs ──
+  { symbol: 'SPY',     name: 'SPDR S&P 500 ETF',            type: 'ETF',       exchange: 'NYSE'   },
+  { symbol: 'QQQ',     name: 'Invesco QQQ Trust',           type: 'ETF',       exchange: 'NASDAQ' },
+  { symbol: 'GLD',     name: 'SPDR Gold Shares',            type: 'ETF',       exchange: 'NYSE'   },
+  { symbol: 'VTI',     name: 'Vanguard Total Stock Market', type: 'ETF',       exchange: 'NYSE'   },
+  // ── Commodities ──
+  { symbol: 'XAUUSD',  name: 'Gold / US Dollar',            type: 'Commodity', exchange: 'COMEX'  },
+  { symbol: 'XAGUSD',  name: 'Silver / US Dollar',          type: 'Commodity', exchange: 'COMEX'  },
+  { symbol: 'BRENT',   name: 'Brent Crude Oil',             type: 'Commodity', exchange: 'ICE'    },
+  { symbol: 'WTI',     name: 'WTI Crude Oil',               type: 'Commodity', exchange: 'NYMEX'  },
+  { symbol: 'NG',      name: 'Natural Gas',                 type: 'Commodity', exchange: 'NYMEX'  },
+];
+
 export const stockItems = [
   { name: 'Dow Jones Industrial Average', sub: 'DJI Index IDXDJX' },
   { name: 'S&P 500 Index', sub: 'SPX Index IDXSP' },
@@ -432,3 +507,44 @@ export const losersData = [
   { symbol: 'Gamma Stream', name: 'Granite Sum...', price: '3432.00', change: '-110.89%', volume: '250.00%', marketCap: '35.00M', bps: '4.56', dividend: '1.50', eps: '2.95', exDate: '2026-04-25', freeFloatMktCap: '28.5M', nextEarnings: '2026-05-20', freeFloat: '85.2%', pb: '3.45' },
   { symbol: 'Beta Wave', name: 'Granite Peak...', price: '2323', change: '-142.30%', volume: '240.00%', marketCap: '28.45M', bps: '2.89', dividend: '0.95', eps: '1.85', exDate: '2026-04-22', freeFloatMktCap: '23.1M', nextEarnings: '2026-05-12', freeFloat: '80.1%', pb: '2.98' },
 ]; 
+
+//  Bonds data placeholder
+
+export const SEED = [
+  {"country":"United States","currency":"USD","data_source":"live","flag":"🇺🇸","id":"US_2Y","instrument":"T-Note","mat_yr":2,"maturity":"2Y","name":"US Treasury","price":100.01,"price_change":0.0,"rating":"AA+","region":"Americas","session":"open","volume_bn":417.0,"yield":3.806,"yield_change":0.0},
+  {"country":"United States","currency":"USD","data_source":"live","flag":"🇺🇸","id":"US_5Y","instrument":"T-Note","mat_yr":5,"maturity":"5Y","name":"US Treasury","price":100.03,"price_change":-0.054,"rating":"AA+","region":"Americas","session":"open","volume_bn":307.8,"yield":3.993,"yield_change":0.012},
+  {"country":"United States","currency":"USD","data_source":"live","flag":"🇺🇸","id":"US_10Y","instrument":"T-Note","mat_yr":10,"maturity":"10Y","name":"US Treasury","price":100.07,"price_change":-0.127,"rating":"AA+","region":"Americas","session":"open","volume_bn":254.4,"yield":4.351,"yield_change":0.016},
+  {"country":"Japan","currency":"JPY","data_source":"simulated","flag":"🇯🇵","id":"JP_10Y","instrument":"JGB","mat_yr":10,"maturity":"10Y","name":"JGB","price":100.03,"price_change":-0.198,"rating":"A+","region":"Asia-Pacific","session":"closed","volume_bn":182.2,"yield":1.527,"yield_change":0.021},
+  {"country":"United States","currency":"USD","data_source":"live","flag":"🇺🇸","id":"US_30Y","instrument":"T-Bond","mat_yr":30,"maturity":"30Y","name":"US Treasury","price":100.19,"price_change":-0.421,"rating":"AA+","region":"Americas","session":"open","volume_bn":180.1,"yield":4.918,"yield_change":0.027},
+  {"country":"China","currency":"CNY","data_source":"simulated","flag":"🇨🇳","id":"CN_10Y","instrument":"CGB","mat_yr":10,"maturity":"10Y","name":"CGB","price":99.87,"price_change":0.179,"rating":"A+","region":"Asia-Pacific","session":"closed","volume_bn":58.4,"yield":2.315,"yield_change":-0.02},
+  {"country":"Japan","currency":"JPY","data_source":"simulated","flag":"🇯🇵","id":"JP_30Y","instrument":"JGB","mat_yr":30,"maturity":"30Y","name":"JGB","price":99.9,"price_change":0.338,"rating":"A+","region":"Asia-Pacific","session":"closed","volume_bn":41.6,"yield":2.485,"yield_change":-0.016},
+  {"country":"Germany","currency":"EUR","data_source":"simulated","flag":"🇩🇪","id":"DE_10Y","instrument":"Bund","mat_yr":10,"maturity":"10Y","name":"Bund","price":100.09,"price_change":-0.075,"rating":"AAA","region":"Europe","session":"open","volume_bn":35.4,"yield":2.67,"yield_change":0.009},
+  {"country":"United Kingdom","currency":"GBP","data_source":"simulated","flag":"🇬🇧","id":"GB_10Y","instrument":"Gilt","mat_yr":10,"maturity":"10Y","name":"Gilt","price":100.15,"price_change":0.103,"rating":"AA","region":"Europe","session":"open","volume_bn":24.9,"yield":4.561,"yield_change":-0.013},
+  {"country":"France","currency":"EUR","data_source":"simulated","flag":"🇫🇷","id":"FR_10Y","instrument":"OAT","mat_yr":10,"maturity":"10Y","name":"OAT","price":100.2,"price_change":0.035,"rating":"AA-","region":"Europe","session":"open","volume_bn":23.5,"yield":3.156,"yield_change":-0.004},
+  {"country":"Germany","currency":"EUR","data_source":"simulated","flag":"🇩🇪","id":"DE_2Y","instrument":"Schatz","mat_yr":2,"maturity":"2Y","name":"Bund","price":99.99,"price_change":0.022,"rating":"AAA","region":"Europe","session":"open","volume_bn":22.0,"yield":2.286,"yield_change":-0.012},
+  {"country":"China","currency":"CNY","data_source":"simulated","flag":"🇨🇳","id":"CN_30Y","instrument":"CGB","mat_yr":30,"maturity":"30Y","name":"CGB","price":100.15,"price_change":-0.575,"rating":"A+","region":"Asia-Pacific","session":"closed","volume_bn":19.8,"yield":2.523,"yield_change":0.027},
+  {"country":"Italy","currency":"EUR","data_source":"simulated","flag":"🇮🇹","id":"IT_10Y","instrument":"BTP","mat_yr":10,"maturity":"10Y","name":"BTP","price":100.02,"price_change":-0.202,"rating":"BBB+","region":"Europe","session":"open","volume_bn":18.4,"yield":3.778,"yield_change":0.024},
+  {"country":"Canada","currency":"CAD","data_source":"simulated","flag":"🇨🇦","id":"CA_10Y","instrument":"GoC","mat_yr":10,"maturity":"10Y","name":"GoC Bond","price":99.91,"price_change":0.022,"rating":"AAA","region":"Americas","session":"open","volume_bn":16.8,"yield":3.661,"yield_change":-0.003},
+  {"country":"South Korea","currency":"KRW","data_source":"simulated","flag":"🇰🇷","id":"KR_10Y","instrument":"KTB","mat_yr":10,"maturity":"10Y","name":"KTB","price":100.0,"price_change":-0.097,"rating":"AA","region":"Asia-Pacific","session":"closed","volume_bn":14.6,"yield":2.97,"yield_change":0.011},
+  {"country":"Australia","currency":"AUD","data_source":"simulated","flag":"🇦🇺","id":"AU_10Y","instrument":"TIB","mat_yr":10,"maturity":"10Y","name":"ACGB","price":99.92,"price_change":0.127,"rating":"AAA","region":"Asia-Pacific","session":"closed","volume_bn":12.2,"yield":4.39,"yield_change":-0.016},
+  {"country":"United Kingdom","currency":"GBP","data_source":"simulated","flag":"🇬🇧","id":"GB_30Y","instrument":"Gilt","mat_yr":30,"maturity":"30Y","name":"Gilt","price":99.91,"price_change":-0.314,"rating":"AA","region":"Europe","session":"open","volume_bn":11.5,"yield":5.126,"yield_change":0.021},
+  {"country":"Italy","currency":"EUR","data_source":"simulated","flag":"🇮🇹","id":"IT_30Y","instrument":"BTP","mat_yr":30,"maturity":"30Y","name":"BTP","price":99.36,"price_change":0.141,"rating":"BBB+","region":"Europe","session":"open","volume_bn":8.2,"yield":4.238,"yield_change":-0.008}
+];
+
+export const REGION_LABELS = { '': 'All', Americas: 'Americas', Europe: 'Europe', 'Asia-Pacific': 'Asia-Pac' };
+
+export const COLUMNS = [
+  { key: 'country', label: 'Country' },
+  { key: 'instrument', label: 'Instrument' },
+  { key: 'mat_yr', label: 'Maturity' },
+  { key: null, label: 'Session' },
+  { key: 'yield', label: 'Yield %' },
+  { key: 'yield_change', label: 'Chg (bps)' },
+  { key: 'price', label: 'Price' },
+  { key: 'price_change', label: 'Px Chg' },
+  { key: 'volume_bn', label: 'Volume USD bn' },
+  { key: 'rating', label: 'Rating' },
+  { key: null, label: 'CCY' },
+  { key: null, label: 'Source' },
+];
+

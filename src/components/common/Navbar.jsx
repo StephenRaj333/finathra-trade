@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ChartCandlestick , Globe, ArrowDownUp , Percent , Settings, CircleUser, Headset } from 'lucide-react';
+import { ChartCandlestick , Globe, ArrowDownUp , Percent , Settings, CircleUser, Headset, EarthLock } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
@@ -7,6 +7,7 @@ export default function Navbar() {
   const mainLinks = [
     { path: '/stocks', label: 'Stocks', icon: (color) => <ChartCandlestick size={22} strokeWidth={1.3} color={color} /> },
     { path: '/markets', label: 'Markets', icon: (color) => <Globe  size={22} strokeWidth={1.3} color={color} /> },
+    { path: '/bonds', label: 'Bonds', icon: (color) => <EarthLock  size={22} strokeWidth={1.3} color={color} /> },
     { path: '/trade', label: 'Trade', icon: (color) => <ArrowDownUp  size={22} strokeWidth={1.3} color={color} /> },
     { path: '/portfolio', label: 'Portfolio', icon: (color) => <Percent  size={22} strokeWidth={1.3} color={color} /> },
     { path: '/account', label: 'Account', icon: (color) => <CircleUser  size={22} strokeWidth={1.3} color={color} /> },
