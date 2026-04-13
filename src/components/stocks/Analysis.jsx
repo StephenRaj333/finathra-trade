@@ -99,6 +99,37 @@ function PriceTargetChart({ high, average, low, current }) {
 
         const maxVal = Math.max(high, current) * 1.15;
 
+        const updateCurrentBox = () => {
+            const px = chart.convertToPixel({ xAxisIndex: 0 }, current);
+            if (px == null) return;
+            chart.setOption({
+                graphic: [
+                    {
+                        type: 'group',
+                        left: px - 55,
+                        bottom: 6,
+                        children: [
+                            {
+                                type: 'rect',
+                                z: 100,
+                                left: 'center',
+                                top: 0,
+                                shape: { width: 110, height: 26, r: 6 },
+                                style: { fill: '#fff', stroke: '#ddd', lineWidth: 1, shadowBlur: 4, shadowColor: 'rgba(0,0,0,0.06)' },
+                            },
+                            {
+                                type: 'text',
+                                z: 101,
+                                left: 'center',
+                                top: 6,
+                                style: { text: `Current  ${current.toFixed(2)}`, fill: '#333', fontSize: 12, fontWeight: 600 },
+                            },
+                        ],
+                    }, 
+                ],
+            });
+        };
+
         chart.setOption({
             animation: true,
             animationDuration: 600,
@@ -156,33 +187,14 @@ function PriceTargetChart({ high, average, low, current }) {
                     },
                 },
             ],
-            graphic: [
-                {
-                    type: 'group',
-                    left: '45%',
-                    bottom: 6,
-                    children: [
-                        {
-                            type: 'rect',
-                            z: 100,
-                            left: 'center',
-                            top: 0,
-                            shape: { width: 110, height: 26, r: 6 },
-                            style: { fill: '#fff', stroke: '#ddd', lineWidth: 1, shadowBlur: 4, shadowColor: 'rgba(0,0,0,0.06)' },
-                        },
-                        {
-                            type: 'text',
-                            z: 101,
-                            left: 'center',
-                            top: 6,
-                            style: { text: `Current  ${current.toFixed(2)}`, fill: '#333', fontSize: 12, fontWeight: 600 },
-                        },
-                    ],
-                },
-            ],
         });
 
-        const ro = new ResizeObserver(() => chart.resize());
+        chart.on('finished', updateCurrentBox);
+
+        const ro = new ResizeObserver(() => {
+            chart.resize();
+            updateCurrentBox();
+        });
         ro.observe(chartRef.current);
         return () => { ro.disconnect(); chart.dispose(); };
     }, [high, average, low, current]);
