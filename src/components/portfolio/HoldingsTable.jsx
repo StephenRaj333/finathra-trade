@@ -125,42 +125,42 @@ export default function HoldingsTable() {
                 <td className="px-4 py-2.5">
                   <div className="flex items-center gap-3 justify-between">
                     <div className="min-w-0">
-                      <p className="text-[12px] font-semibold text-gray-900 leading-tight">{row.company}</p>
-                      <p className="text-xxs text-gray-400 leading-tight mt-0.5">{row.index} &nbsp;·&nbsp; {row.timeAgo}</p>
+                      <p className="text-[12px] font-semibold text-black leading-tight">{row.company}</p>
+                      <p className="text-xxs text-[#7F7F7F] leading-tight mt-0.5">{row.index} &nbsp;·&nbsp; {row.timeAgo}</p>
                     </div>
                     <Sparkline data={row.sparkline} color={row.sparklineColor} />
                   </div>
                 </td>
                 {/* Units */}
-                <td className="px-3 py-2.5 text-right text-[12px] font-semibold text-gray-900 whitespace-nowrap">
+                <td className="px-3 py-2.5 text-right text-[12px] font-semibold text-[#616161] whitespace-nowrap">
                   {row.units}
                 </td>
                 {/* Avg Price */}
-                <td className="px-3 py-2.5 text-right text-[12px] font-semibold text-gray-900 whitespace-nowrap">
+                <td className="px-3 py-2.5 text-right text-[12px] font-bold text-black whitespace-nowrap">
                   {row.avgPrice}
                 </td>
                 {/* Invested Value */}
-                <td className="px-3 py-2.5 text-right text-[12px] font-semibold text-gray-900 whitespace-nowrap">
+                <td className="px-3 py-2.5 text-right text-[12px] font-semibold text-[#616161] whitespace-nowrap">
                   {row.investedValue}
                 </td>
                 {/* Current Value */}
                 <td className="px-3 py-2.5 text-right whitespace-nowrap">
-                  <div className={`text-[12px] font-semibold leading-tight flex items-center justify-end gap-1.5 ${row.currentDirection === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                  <div className={`text-[12px] font-semibold leading-tight flex items-center justify-end gap-1.5 ${row.currentDirection === 'up' ? 'text-[#079E53]' : 'text-red-500'}`}>
                     <span>{row.currentValue}</span>
                     {row.currentDirection === 'up' ? <TriangleUp color="#22c55e" /> : <TriangleDown color="#ef4444" />}
-                  </div>
+                  </div> 
                 </td>
                 {/* Total */}
                 <td className="px-4 py-2.5">
                   <div className="flex items-center gap-2 justify-end">
                     <div className="flex flex-col items-end">
-                      <div className={`text-[12px] font-semibold leading-tight flex items-center gap-1.5 ${row.isGain ? 'text-green-600' : 'text-red-500'}`}>
+                      <div className={`text-[12px] font-semibold leading-tight flex items-center gap-1.5 ${row.isGain ? 'text-[#079E53]' : 'text-red-500'}`}>
                         <span>{row.total}</span>
                         {row.totalDirection === 'up' ? <TriangleUp color="#22c55e" /> : <TriangleDown color="#ef4444" />}
                       </div>
-                      <p className="text-xxs text-gray-500 font-medium leading-tight mt-0.5">{row.totalPct}</p>
+                      <p className={`text-xxs ${row.isGain ? 'text-[#079E53]' : 'text-[#ef4444]'} font-medium leading-tight mt-0.5`}>{row.totalPct}</p>
                     </div>
-                    <ChevronRight size={20} color="#724A9A" /> 
+                    <ChevronRight size={16} color="#724A9A" /> 
                   </div>
                 </td>
               </tr>
