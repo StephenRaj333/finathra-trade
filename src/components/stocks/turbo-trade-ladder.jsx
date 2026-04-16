@@ -88,7 +88,7 @@ const TurboTradeLadder = () => {
                                 {[
                                     { key: 'limit', label: 'Limit' },
                                     { key: 'market', label: 'Market' },
-                                    { key: 'stop', label: 'Stop' },
+                                    // { key: 'stop', label: 'Stop' },
                                 ].map(({ key, label }) => (
                                     <button
                                         key={key}
@@ -107,12 +107,13 @@ const TurboTradeLadder = () => {
 
                         {/* Order Type – quantity input row */}
                         <div>
-                            <p className="text-xs text-gray-500 mb-1.5">Order Type</p>
+                            <p className="text-xs text-gray-500 mb-1.5">Quantity</p>
                             {/* Input with icons */}
                             <div className="flex items-center border border-gray-300 rounded-md overflow-hidden mb-2">
                                 <input
                                     type="text"
                                     placeholder="First name"
+                                    value={1} 
                                     className="flex-1 px-3 py-2 text-sm outline-none text-gray-400"
                                 />
                                 <button className="w-8 h-9 flex items-center justify-center bg-[#EDE7F6] border-l border-gray-300">
